@@ -1,0 +1,86 @@
+#SPIT_logo{
+    width: 280px;
+    height:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top:20px;
+}
+/* .form-control,.btn {
+    border-radius: 1rem;
+    } */
+    /* .login {
+    background:linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)),url("C:/xampp/htdocs/dbms/img/lib.png") no-repeat center center fixed ;
+    background-size: cover;
+    background-color: #FBF7F6;
+    } */
+
+    .card-signin {
+        border: 0;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px 0 white;
+        }
+    
+        .card-signin .card-title {
+        margin-bottom: 20px;
+        font-weight: 300;
+        font-size: 30px;
+        font-weight: bold;
+        }
+    
+        .card-signin .card-body {
+        padding: 20px;
+        }
+    
+        .form-signin {
+        width: 100%;
+        }
+    
+        .form-signin .btn {
+        font-size: 90%;
+        border-radius: 50px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        padding: 10px;
+        transition: all 0.2s;
+        }
+    
+        .form-group {
+        position: relative;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        }
+    
+        .form-group input {
+        height: auto;
+        border-radius: 20px;
+        }
+    
+        /* .form-label-group>input,
+        .form-label-group>label {
+        padding: var(--input-padding-y) var(--input-padding-x);
+        } */
+    
+        .form-group input::-webkit-input-placeholder {
+        color: transparent;
+        }
+    
+        .form-group input:-ms-input-placeholder {
+        color: transparent;
+        }
+    
+        .form-group input::-ms-input-placeholder {
+        color: transparent;
+        }
+    
+        .form-group input::-moz-placeholder {
+        color: transparent;
+        }
+    
+        .form-group input::placeholder {
+        color: transparent;
+        }
+    
+        .new{
+            text-align:center;
+        }
