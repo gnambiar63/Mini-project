@@ -17,10 +17,7 @@
 
     .card-signin {
         border: 0;
-        border-radius: 10px;
-        box-shadow: 0 0px 0px 0 #FFF2E9;
-        ;
-        }
+        border-radius: 10px;        }
     
         .card-signin .card-title {
         margin-bottom: 20px;

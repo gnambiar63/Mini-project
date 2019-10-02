@@ -7,13 +7,13 @@ import { FormBuilder,FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginform: FormGroup;
   submitted = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.loginForm= new FormGroup({
+    this.loginform= new FormGroup({
       Username: new FormControl(),
       Password: new FormControl()
     });
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   onsubmit():void{
-    console.log(this.loginForm.value);
+    console.log(this.loginform.value);
   }
 
 }
