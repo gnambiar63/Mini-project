@@ -5,10 +5,21 @@
           <div class="card card-signin my-5">
               <div class="card-body">
                   <h3 class="card-title text-center">Login</h3>
+
+                  <div *ngIf="loginsuccess" class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Login Successful!</strong> 
+                  </div>
+
+                  <div *ngIf="loginfailed" class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Login Failed!</strong> 
+                      </div>
+
                   <form class="form-signin" [formGroup]="loginform" (ngSubmit)="onsubmit()">
                   <div class="form-group">
-                      <label for="name">Username</label>
-                      <input id="Username" formControlName="Username" type="text" class="form-control">
+                      <label for="email">Email</label>
+                      <input id="Email" formControlName="Email" type="text" class="form-control">
                   </div>
                   <div class="form-group">
                       <label for="pass">Password</label>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AccountService } from '../shared/account.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,10 +9,13 @@ import { FormBuilder,FormGroup, FormControl, Validators, AbstractControl } from 
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  server_url="http://localhost:3000/register";
   signupform: FormGroup;
   submitted = false;
+  branch: any = ['COMPS', 'IT', 'EXTC', 'ETRX','MCA']
 
-  constructor(private fb:FormBuilder) { }
+
+  constructor(private fb:FormBuilder,private http: HttpClient,private account_service: AccountService) { }
 
   ngOnInit() {
     // this.loginform= new FormGroup({
@@ -22,6 +27,8 @@ export class SignupComponent implements OnInit {
       Email:['',[Validators.required,Validators.email]],
       Password:['',[Validators.required,Validators.minLength(8)]],
       CPassword:['',[Validators.required,Validators.minLength(8)]],
+      Branch:['',[Validators.required]]
+
     })
 
 
@@ -30,6 +37,10 @@ export class SignupComponent implements OnInit {
 
   onsubmit():void{
     console.log(this.signupform.value);
+    this.account_service.register(this.signupform.value).subscribe(
+      (res)=> console.log(res),
+      (err)=> console.log(err)
+    );
   }
 
 }

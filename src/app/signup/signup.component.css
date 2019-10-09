@@ -50,9 +50,12 @@
         padding-bottom: 10px;
         }
     
-        .form-group input {
+        .form-group input,select {
         height: auto;
         border-radius: 10px;
+        }
+        #form-branch{
+            border-radius: 10px;
         }
     
         /* .form-label-group>input,
