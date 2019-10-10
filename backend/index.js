@@ -99,29 +99,38 @@ app.post("/login",function(req,res)
         {
             res.send('Something went wrong');
         }
-        // console.log(users);
-        console.log(users.Password);
-        bcrypt.compare(req.body.Password,users.Password,(er,ans) => 
+        if(users)
         {
-            if(er)
+            // console.log(users);
+            console.log('Password is '+users.Password);
+            bcrypt.compare(req.body.Password,users.Password,(er,ans) => 
             {
-                res.send('Something went wrong');
-            }
-            // console.log(ans);  
-            // console.log(req.body.Password);
-            if(ans)
-            {
-                console.log('Login Success');
-                res.json({message : 'Login of '+users.Email+' is successful',value : 1, fvalue: '', Email : users.Email});
-            }
-            else
-            {
-                console.log('Login Failed');
-                res.send({message : 'Login Failed', value : '' , fvalue : 1, Email : ''});
-            }
-        });
-        console.log(users);
+                if(er)
+                {
+                    res.send('Something went wrong');
+                }
+                // console.log(ans);  
+                // console.log(req.body.Password);
+                if(ans)
+                {
+                    console.log('Login Success');
+                    res.json({message : 'Login of '+users.Email+' is successful',value : 1, fvalue: '', Email : users.Email});
+                }
+                else
+                {
+                    console.log('Login Failed');
+                    res.send({message : 'Login Failed', value : '' , fvalue : 1, Email : ''});
+                }
+            });
+            console.log(users);
 
+        }
+        else
+        {
+            console.log('Login Failed');
+            res.send({message : 'Login Failed', value : '' , fvalue : 1, Email : ''});
+        }
+        
     });
 });
 
