@@ -1,27 +1,40 @@
+let express= require('express');
 
+let mongoose= require('mongoose');
 
-const http = require("http");
+let bodyParser= require('body-parser');
 
-const hostname = '127.0.0.1';
+let cors= require('cors');
 
-const port = 3000;
+let app=express();
 
-const server = http.createServer(function(req, res) {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
+var data = require('./data');
 
-/*http.createServer(function (request, response) {
-    // Send the HTTP header 
-    // HTTP Status: 200 : OK
-    // Content Type: text/plain
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    
-    // Send the response body as "Hello World"
-    response.end('Hello World\n');
- }).listen(8081);*/
+let link=data.CloudDBUrl;
 
-server.listen(port, hostname, function() {
-  console.log('Server running at http://'+ hostname + ':' + port + '/');
-});
+const port=process.env.PORT || 3000;
+
+app.listen(port,function(){
+    mongoose.connect(link, { useCreateIndex: true, useNewUrlParser: true , useFindAndModify: false }, function(error){
+        if(error)
+        {
+            console.log(error);
+        }
+        else{
+            console.log("connection successful");
+        }
+    });
+}
+)
+
+console.log("Server started");
+
+app.get('/', (req, res) => res.send('Hello!'));
+
+app.use(cors());    //to avoid proxy conflict
+
+app.use(bodyParser.urlencoded({ extended: true }));     //to pass collective data
+app.use(bodyParser.json());
+
+app.use('/',require('./routes/user.route'));
+

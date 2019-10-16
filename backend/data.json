@@ -1,0 +1,4 @@
+{
+    "CloudDBUrl": "mongodb+srv://admin:admin@mini-project-sx4vj.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecretKey": "MiNiPrOjEcT"
+}

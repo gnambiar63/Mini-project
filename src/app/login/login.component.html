@@ -6,15 +6,20 @@
               <div class="card-body">
                   <h3 class="card-title text-center">Login</h3>
 
-                  <div *ngIf="loginsuccess" class="alert alert-success alert-dismissible">
+                  <div *ngIf="value == '1'" class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Login Successful!</strong> 
                   </div>
 
-                  <div *ngIf="loginfailed" class="alert alert-danger alert-dismissible">
+                  <div *ngIf="value == '0'" class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>Login Failed!</strong> 
                       </div>
+
+                    <div *ngIf="value == '-1'" class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <strong>User Not Found!</strong> 
+                    </div>
 
                   <form class="form-signin" [formGroup]="loginform" (ngSubmit)="onsubmit()">
                   <div class="form-group">

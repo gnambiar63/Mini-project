@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginform: FormGroup;
   submitted = false;
-  public loginsuccess : number;
-  public loginfailed : number;
+  public value : number = 2;
   public Email : string = "";
 
 
@@ -32,14 +31,21 @@ export class LoginComponent implements OnInit {
     this.account_service.login(this.loginform.value).subscribe(
       (res)=> {
         console.log(res);
-        this.loginsuccess = res.value;
-        console.log('Inside'+this.loginsuccess);
-        this.loginfailed = res.fvalue;
+        this.value = 1;
         this.Email = res.Email;
       },
-      (err)=> {console.log(err)}
+      (err)=> 
+      {
+        console.log(err);
+        if(err.status == '401')
+        {
+          this.value = 0;
+        }
+        else{
+          this.value = -1;
+        }
+      }
     );
-    console.log(this.loginsuccess);
 
     // if(true)
     // {
