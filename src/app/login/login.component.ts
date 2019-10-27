@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.value = 1;
         this.Email = res.Email;
+        this.router
+        this.router.navigateByUrl('/home');
       },
       (err)=> 
       {

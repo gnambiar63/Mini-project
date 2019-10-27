@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
-      h4{
+      /* h4{
         color:grey;
         padding-top:20px;
         padding-left: 10px;
@@ -32,6 +32,12 @@
             font-size:4vw;
         }
     }
+    
+    #profile_pc{
+      position:absolute;
+      top:10px; 
+      right:10px;    
+    } */
     body{
     background-color: #FFF2E9;
     }
@@ -39,8 +45,11 @@
 
 </head>
 <body>
-  <h4>SARDAR PATEL INSTITUTE OF TECHNOLOGY</h4>
-  <hr>
+  <!-- <h4>SARDAR PATEL INSTITUTE OF TECHNOLOGY</h4>
+  <button *ngIf="window.innerWidth == 450px" class="btn btn-info btn-lg" id="profile_pc">
+    <span class="fa fa-sign-out"></span> Log out
+  </button>
+  <hr> -->
   <app-root></app-root>
 </body>
 </html>

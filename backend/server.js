@@ -15,7 +15,7 @@ let link=data.CloudDBUrl;
 const port=process.env.PORT || 3000;
 
 app.listen(port,function(){
-    mongoose.connect(link, { useCreateIndex: true, useNewUrlParser: true , useFindAndModify: false }, function(error){
+    mongoose.connect(link, { useCreateIndex: true, useNewUrlParser: true , useFindAndModify: false, useUnifiedTopology: true }, function(error){
         if(error)
         {
             console.log(error);
