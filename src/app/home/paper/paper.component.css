@@ -1,0 +1,158 @@
+.header {
+    background-color: #101217;
+    color: white;
+    justify-content: center;
+    border-bottom: 2px solid white;
+  }
+  
+  .footer {
+    background-color: #101217;
+    color: white;
+    justify-content: center;
+    border-top: 2px solid white;
+  }
+  
+  .colclass {
+    height: 500px;
+    padding: 2% 1%;
+    color: white;
+    background-color: #101217;
+    border-right: 1px solid white;
+  }
+  
+  .row {
+    margin : 0;
+  }
+  
+  .list-group-item {
+    background: transparent !important;
+  }
+  
+  #sideNav > li {
+    text-decoration: none;
+    position: relative;
+  }
+  
+  #sideNav > li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    border-bottom: 2px solid #45A68C;
+    transition: 0.4s;
+  }
+  
+  #sideNav > li:hover:after {
+    width: 100%;
+  }
+  
+  #paper {
+    width:595px;
+    height:842px;
+    /* width:100%; */
+    /* height:100%; */
+    color: black;
+    /* // border: 2px solid red; */
+    background: white;
+    margin:2%;
+  }
+  
+  #logo {
+    margin-left: 5%;
+    margin-top: 5%;
+  }
+  
+  #info {
+    margin: 0 10%;
+    border: 1px solid black;
+     /* height: 200px; */
+  }
+  
+  #headerLeft {
+    list-style-type: none;
+    font-weight: 500;
+    font-size: 0.8rem
+  }
+  
+  hr {
+    margin: 0;
+  }
+  
+  #instructions {
+    margin-left: 5%;
+  }
+  
+  #instructions > ul {
+    list-style-type: none;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+  
+  #instructions > p {
+    margin-bottom: 0;
+  }
+  
+  .grid-container {
+    display: grid;
+    margin: 0 10%;
+    grid-template-columns: 10% 70% 10% auto;
+    grid-gap: 1px;
+    background-color: black;
+    padding: 1px;
+    font-size: 0.8rem;
+  }
+  
+  .grid-item {
+    padding:0 2%;
+    background-color: white;
+  }
+  
+  #paperbold{
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+  #questions{
+    margin: 0 10%;
+    }
+    table th{
+      border:1px solid black;
+      list-style-type: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+  }
+  table tbody{
+      border-bottom:1px solid black;
+  }
+  table td{
+    border-left:1px solid black;
+    border-right:1px solid black;
+  }
+  .one,.three,.four{
+    width:10%;
+    padding:0 8px;
+  
+  }
+  .two{
+    width:70%;
+    padding:0 8px;
+  
+  }
+  
+  div.scroll {
+    width:30vw;
+    overflow-x:scroll;
+    overflow-y:scroll;
+    height:80vh;
+    margin:2px;
+}
+@media (max-width: 450px) {
+  div.scroll {
+    width:100vw;
+    overflow-x:scroll;
+    overflow-y:scroll;
+    height:50vh;
+    background:white;
+    margin:2px;
+}
+}

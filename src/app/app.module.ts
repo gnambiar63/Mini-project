@@ -8,6 +8,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { InputComponent } from './home/input/input.component';
+import { PaperComponent } from './home/paper/paper.component';
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +20,9 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     SignupComponent,
     ConfirmEqualValidatorDirective,
-    HomeComponent
+    HomeComponent,
+    InputComponent,
+    PaperComponent
     
   ],
   imports: [
@@ -23,7 +30,8 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

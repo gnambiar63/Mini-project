@@ -1,0 +1,8 @@
+.input{
+    height:80vh;
+}
+@media (max-width: 450px) {
+    .input{
+        height:50vh;
+    }
+  }

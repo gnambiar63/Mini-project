@@ -1,0 +1,47 @@
+<!-- <cdk-virtual-scroll-viewport id='paper' itemSize='4'> -->
+  <div class="scroll">  
+  <div id="paper">
+      <img id='logo' src="https://img.collegepravesh.com/2018/11/SPIT-Mumbai-Logo.png" alt="SPIT logo" height=80px>
+      <div style='text-align: center'>
+        <h4>Sardar Patel Institute of Technology</h4>
+        <p>Bhavan's Campus, Munshi Nagar, Andheri West, Mumbai - 400058</p>
+      </div>
+      <div id='info'>
+        <div style='margin-top: 2%;text-align: center'>
+          <h5>End Semester Examination</h5>
+          <p>{{ semMonth }}</p>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <ul id='headerLeft'>
+              <li>Max. Marks: {{ marks }}</li>
+              <li>Class: {{ class }}</li>
+              <li>Course code: {{ courseCode }}</li>
+              <li>Course: {{ course }}</li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul id='headerLeft'>
+              <li>Duration: {{ duration }}</li>
+              <li>Semester: {{ sem }}</li>
+              <li>Branch: {{ branch }}</li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div id='instructions'>
+          <p>Instructions: </p>
+          <ul>
+            <li *ngFor="let i of instructions;index as num">{{ num+1 }}. {{ i }}</li>
+          </ul>
+        </div>
+      </div>
+      <br><br>
+      
+
+    </div>
+  </div>
+
+    <!-- </cdk-virtual-scroll-viewport> -->
+
+    <!-- <app-login></app-login> -->
