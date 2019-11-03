@@ -12,7 +12,8 @@ import { InputComponent } from './home/input/input.component';
 import { PaperComponent } from './home/paper/paper.component';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ScrollingModule
+    ScrollingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

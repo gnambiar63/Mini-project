@@ -5,7 +5,17 @@
     flex-wrap: wrap;
   }
    */
+   .row{
+       margin: 1%;
+   }
+   @media (max-width: 450px) {
+    .row{
+        text-align: center;
+        margin: 5%;
+    }
+}
 .colclass{
-    width:100%;
-    height:auto;
+    flex:1;
+    border: 1px solid grey;
+
 }

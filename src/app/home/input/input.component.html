@@ -1,3 +1,113 @@
 <div class="input">
-    <p>input works!</p>
+    <cdk-virtual-scroll-viewport id='demo' itemSize='4'>
+
+    <!-- <button mat-raised-button>Hello World</button> -->
+    <mat-vertical-stepper linear class="step">
+        <mat-step label="Course Details">
+            <p style="text-align: center;"><strong>Course Details</strong></p>
+            <form class="coursedetails" [formGroup]="course_details" (ngSubmit)="coursesubmit()">
+                <div class="form-group">
+                    <label for="name">Course Name</label>
+                    <input id="name" formControlName="name" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="code">Course Code</label>
+                    <input id="code" formControlName="code" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="session">Sessions Of Course</label>
+                    <input id="session" formControlName="session" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <input id="semester" formControlName="semester" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="code">Course Code</label>
+                    <input id="code" formControlName="code" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="credits">Credits</label>
+                    <input id="credits" formControlName="credits" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ltp">L:T:P</label>
+                    <input id="ltp" formControlName="ltp" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label for="co">No of CO's</label>
+                        <input id="co" formControlName="co" type="text" class="form-control">
+                    </div>
+                <div class="center">    
+                    <button class="btn btn-sm btn-primary" matStepperNext type="submit">Save and Proceed</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="Course Outcomes">
+                <p style="text-align: center;"><strong>Details of each CO</strong></p>
+                <mat-horizontal-stepper linear class="step">
+                <div class="co_details"  *ngFor="let i of co;index as num">
+                    <mat-step label="CO{{num+1}}">
+                        <p style="text-align: center;"><strong>Course Details</strong></p>
+                        <form class="COdetails" [formGroup]="CO_details" (ngSubmit)="CO_submit()">
+                            <div class="form-group">
+                                <label for="course_outcome">Course Outcome</label>
+                                <input id="course_outcome" formControlName="course_outcome" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cognitive_level">Cognitive Level</label>
+                                <input id="cognitive_level" formControlName="cognitive_level" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                    <label for="session">No of Sessions</label>
+                                    <input id="session" formControlName="session" type="text" class="form-control">
+                            </div>
+                            <div class="center">    
+                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    </div>
+            </mat-horizontal-stepper>
+            <div class="center">    
+                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
+                </div>
+        </mat-step>
+        <mat-step label="CO-PO Mapping">
+                <p style="text-align: center;"><strong>CO-PO Mapping</strong></p>
+                <mat-horizontal-stepper linear class="step">
+                <div class="co_details"  *ngFor="let i of co;index as num">
+                    <mat-step label="CO{{num+1}}">
+                        <div *ngIf="show">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of co[num].PO_map'></div>
+                        </div>
+                            <form class="PO_details" [formGroup]="PO_details" (ngSubmit)="PO_submit(num)">
+                            <div class="form-group">
+                                <label for="po_pso">Add PO/PSO</label>
+                                <div class="input-group mb-3">
+                                    <input id="po_pso" formControlName="po_pso" type="text" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-info">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    </div>
+            </mat-horizontal-stepper>
+        </mat-step>
+        <mat-step label="Mapping Justification">
+            <p>CO-PO Mapping</p>
+        </mat-step>
+        <mat-step label="Marks Distribution">
+            <p>CO-PO Mapping</p>
+        </mat-step>
+        <mat-step label="Attainment">
+            <p>CO-PO Mapping</p>
+        </mat-step>
+        <mat-step label="Export">
+            <p>Thanks for Using</p>
+        </mat-step>
+    </mat-vertical-stepper>
+    </cdk-virtual-scroll-viewport>
 </div>
