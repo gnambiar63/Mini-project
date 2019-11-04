@@ -78,9 +78,12 @@
                 <mat-horizontal-stepper linear class="step">
                 <div class="co_details"  *ngFor="let i of co;index as num">
                     <mat-step label="CO{{num+1}}">
-                        <div *ngIf="show">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of co[num].PO_map'></div>
+                        <!-- <cdk-virtual-scroll-viewport id = "alert_demo" itemSize='4'> -->
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of co[num].PO_map;index as index'>
+                            <button class="close" data-dismiss="alert" aria-label="close" (click)="del($event,index,num)">&times;</button>
+                            {{co[num].PO_map[index]}}
                         </div>
+                        <!-- </cdk-virtual-scroll-viewport> -->
                             <form class="PO_details" [formGroup]="PO_details" (ngSubmit)="PO_submit(num)">
                             <div class="form-group">
                                 <label for="po_pso">Add PO/PSO</label>
@@ -100,7 +103,27 @@
             <p>CO-PO Mapping</p>
         </mat-step>
         <mat-step label="Marks Distribution">
-            <p>CO-PO Mapping</p>
+                <p style="text-align: center;"><strong>Details of each CO</strong></p>
+                <mat-horizontal-stepper linear class="step">
+                <div class="co_details"  *ngFor="let i of exam;index as num">
+                    <mat-step label="{{i}}">
+                        <p style="text-align: center;"><strong>Course Details</strong></p>
+                        <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks_dist()">
+                            <div class="form-group" *ngFor="let p of co;index as index">
+                                <input type="checkbox" formControlName="{{index}}">
+                                CO{{num}}
+                            </div>
+                            
+                            <div class="center">    
+                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    </div>
+            </mat-horizontal-stepper>
+            <div class="center">    
+                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
+                </div>
         </mat-step>
         <mat-step label="Attainment">
             <p>CO-PO Mapping</p>

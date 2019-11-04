@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CO } from 'src/app/shared/CO.model';
 
 @Component({
@@ -12,9 +12,11 @@ export class InputComponent implements OnInit {
   course_details : FormGroup;
   CO_details : FormGroup;
   PO_details : FormGroup;
-  PO_index=0;
+  exam :Array<string>=["ISE1","ISE2","MSE","ESE"];
+  exam_values:Array<string>=[];
   show = false;
   co:Array<CO>=[];
+  marks_dist: FormGroup;
   constructor(private fb:FormBuilder) { }
 
   ngOnInit() {
@@ -38,6 +40,10 @@ export class InputComponent implements OnInit {
     this.PO_details=this.fb.group({
       po_pso:['',Validators.required]
     })
+
+    this.marks_dist = this.fb.group({
+      orders: new FormArray([])
+    });
       
   }
   coursesubmit(){
@@ -45,7 +51,12 @@ export class InputComponent implements OnInit {
     console.log(this.co);
     for(let i=0;i<this.course_details.controls['co'].value;i++)
     {
-      let val :CO;
+      let val : CO = {
+        Course_Outcome : "",
+        Cognitive_Level : "",
+        No_of_hours : 0,
+        PO_map : []
+      };
       this.co.push(val);
     }
   }
@@ -53,7 +64,11 @@ export class InputComponent implements OnInit {
   {
     // this.co[this.PO_index].PO_map.push(this.PO_details.controls['po_pso'].value);
     console.log(num);
-    // this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
+    this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
+    console.log(this.co[num].PO_map);
     this.show = true;
+  }
+  del(event,index,num){
+    this.co[num].PO_map.splice(index,1);
   }
 }
