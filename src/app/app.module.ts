@@ -14,6 +14,9 @@ import { PaperComponent } from './home/paper/paper.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { CourseOutcomeComponent } from './home/input/course-outcome/course-outcome.component';
+import { COPOMappingComponent } from './home/input/co-po-mapping/co-po-mapping.component';
+import { MarksDistributionComponent } from './home/input/marks-distribution/marks-distribution.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { MaterialModule } from './material/material.module';
     ConfirmEqualValidatorDirective,
     HomeComponent,
     InputComponent,
-    PaperComponent
+    PaperComponent,
+    CourseOutcomeComponent,
+    COPOMappingComponent,
+    MarksDistributionComponent
     
   ],
   imports: [

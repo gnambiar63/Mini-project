@@ -1,0 +1,28 @@
+<p style="text-align: center;"><strong>Details of each CO</strong></p>
+                <mat-horizontal-stepper linear class="step">
+                <div class="co_details"  *ngFor="let i of co;index as num">
+                    <mat-step label="CO{{num+1}}">
+                        <p style="text-align: center;"><strong>Course Details</strong></p>
+                        <form class="COdetails" [formGroup]="CO_details" (ngSubmit)="CO_submit()">
+                            <div class="form-group">
+                                <label for="course_outcome">Course Outcome</label>
+                                <input id="course_outcome" formControlName="course_outcome" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cognitive_level">Cognitive Level</label>
+                                <input id="cognitive_level" formControlName="cognitive_level" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                    <label for="session">No of Sessions</label>
+                                    <input id="session" formControlName="session" type="text" class="form-control">
+                            </div>
+                            <div class="center">    
+                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    </div>
+            </mat-horizontal-stepper>
+            <div class="center">    
+                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
+                </div>

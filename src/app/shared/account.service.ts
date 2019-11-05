@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CO } from 'src/app/shared/CO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class AccountService {
 
   private data : string = '';
+
+  co:Array<CO>=[];
 
   constructor(private http: HttpClient) { }
 
@@ -19,10 +22,11 @@ export class AccountService {
     return this.http.post<any>("http://localhost:3000/login",logindata);
   }
   setValue(val) {
-    this.data = val;
+    this.co = val;
+    return null;
   }
 
   getValue() {
-      return this.data ;
+      return this.co ;
   }
 }

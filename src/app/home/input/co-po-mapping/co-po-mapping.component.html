@@ -1,0 +1,24 @@
+<p style="text-align: center;"><strong>CO-PO Mapping</strong></p>
+                <mat-horizontal-stepper linear class="step">
+                <div class="co_details"  *ngFor="let i of co;index as num">
+                    <mat-step label="CO{{num+1}}">
+                        <!-- <cdk-virtual-scroll-viewport id = "alert_demo" itemSize='4'> -->
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of co[num].PO_map;index as index'>
+                            <button class="close" data-dismiss="alert" aria-label="close" (click)="del($event,index,num)">&times;</button>
+                            {{co[num].PO_map[index]}}
+                        </div>
+                        <!-- </cdk-virtual-scroll-viewport> -->
+                            <form class="PO_details" [formGroup]="PO_details" (ngSubmit)="PO_submit(num)">
+                            <div class="form-group">
+                                <label for="po_pso">Add PO/PSO</label>
+                                <div class="input-group mb-3">
+                                    <input id="po_pso" formControlName="po_pso" type="text" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-info">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    </div>
+            </mat-horizontal-stepper>

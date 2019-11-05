@@ -44,86 +44,16 @@
             </form>
         </mat-step>
         <mat-step label="Course Outcomes">
-                <p style="text-align: center;"><strong>Details of each CO</strong></p>
-                <mat-horizontal-stepper linear class="step">
-                <div class="co_details"  *ngFor="let i of co;index as num">
-                    <mat-step label="CO{{num+1}}">
-                        <p style="text-align: center;"><strong>Course Details</strong></p>
-                        <form class="COdetails" [formGroup]="CO_details" (ngSubmit)="CO_submit()">
-                            <div class="form-group">
-                                <label for="course_outcome">Course Outcome</label>
-                                <input id="course_outcome" formControlName="course_outcome" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="cognitive_level">Cognitive Level</label>
-                                <input id="cognitive_level" formControlName="cognitive_level" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                    <label for="session">No of Sessions</label>
-                                    <input id="session" formControlName="session" type="text" class="form-control">
-                            </div>
-                            <div class="center">    
-                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
-                            </div>
-                        </form>
-                    </mat-step>
-                    </div>
-            </mat-horizontal-stepper>
-            <div class="center">    
-                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
-                </div>
+            <app-course-outcome></app-course-outcome>       
         </mat-step>
         <mat-step label="CO-PO Mapping">
-                <p style="text-align: center;"><strong>CO-PO Mapping</strong></p>
-                <mat-horizontal-stepper linear class="step">
-                <div class="co_details"  *ngFor="let i of co;index as num">
-                    <mat-step label="CO{{num+1}}">
-                        <!-- <cdk-virtual-scroll-viewport id = "alert_demo" itemSize='4'> -->
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of co[num].PO_map;index as index'>
-                            <button class="close" data-dismiss="alert" aria-label="close" (click)="del($event,index,num)">&times;</button>
-                            {{co[num].PO_map[index]}}
-                        </div>
-                        <!-- </cdk-virtual-scroll-viewport> -->
-                            <form class="PO_details" [formGroup]="PO_details" (ngSubmit)="PO_submit(num)">
-                            <div class="form-group">
-                                <label for="po_pso">Add PO/PSO</label>
-                                <div class="input-group mb-3">
-                                    <input id="po_pso" formControlName="po_pso" type="text" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-info">Add</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </mat-step>
-                    </div>
-            </mat-horizontal-stepper>
+                <app-co-po-mapping></app-co-po-mapping>
         </mat-step>
         <mat-step label="Mapping Justification">
             <p>CO-PO Mapping</p>
         </mat-step>
         <mat-step label="Marks Distribution">
-                <p style="text-align: center;"><strong>Details of each CO</strong></p>
-                <mat-horizontal-stepper linear class="step">
-                <div class="co_details"  *ngFor="let i of exam;index as num">
-                    <mat-step label="{{i}}">
-                        <p style="text-align: center;"><strong>Course Details</strong></p>
-                        <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks_dist()">
-                            <div class="form-group" *ngFor="let p of co;index as index">
-                                <input type="checkbox" formControlName="{{index}}">
-                                CO{{num}}
-                            </div>
-                            
-                            <div class="center">    
-                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
-                            </div>
-                        </form>
-                    </mat-step>
-                    </div>
-            </mat-horizontal-stepper>
-            <div class="center">    
-                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
-                </div>
+                <app-marks-distribution></app-marks-distribution>
         </mat-step>
         <mat-step label="Attainment">
             <p>CO-PO Mapping</p>
