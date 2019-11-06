@@ -1,12 +1,12 @@
 <p style="text-align: center;"><strong>Details of each CO</strong></p>
                 <mat-horizontal-stepper linear class="step">
-                <div class="co_details"  *ngFor="let i of exam;index as num">
-                    <mat-step label="{{i}}">
+                <div class="co_details"  *ngFor="let i of co;index as num">
+                    <mat-step label="CO{{num+1}}">
                         <p style="text-align: center;"><strong>Course Details</strong></p>
-                        <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks_dist()">
-                            <div class="form-group" *ngFor="let p of co;index as index">
-                                <input type="checkbox" formControlName="{{index}}">
-                                CO{{index+1}}
+                        <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks(num)">
+                            <div class="form-group" *ngFor="let p of exam;index as index">
+                                    {{p}}:
+                                    <input type="text" class="form-control" formControlName="{{p}}">
                             </div>
                             
                             <div class="center">    

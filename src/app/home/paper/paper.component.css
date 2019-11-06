@@ -27,6 +27,22 @@
     background: white;
     /* margin:2%; */
   }
+  #list{
+    margin: 0 10%;
+    }
+    table th{
+      border:1px solid black;
+      list-style-type: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+  }
+  table tbody{
+      border-bottom:1px solid black;
+  }
+  table td{
+    border:1px solid black;
+    font-size: 0.8rem;
+  }
   
   #logo {
     margin-left: 5%;
@@ -123,4 +139,8 @@
     /* background:white; */
     /* margin:2px; */
 }
+}
+.space{
+  /* padding-left:50px; */
+  margin-left:5%;
 }

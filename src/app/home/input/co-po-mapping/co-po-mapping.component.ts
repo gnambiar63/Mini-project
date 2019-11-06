@@ -30,9 +30,11 @@ export class COPOMappingComponent implements OnInit {
     this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
     console.log(this.co[num].PO_map);
     this.show = true;
+    this.account_service.changeMessage(this.co)
   }
   
   del(event,index,num){
     this.co[num].PO_map.splice(index,1);
+    this.account_service.changeMessage(this.co)
   }
 }

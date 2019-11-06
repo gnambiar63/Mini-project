@@ -1,5 +1,5 @@
 <!-- <cdk-virtual-scroll-viewport id='paper' itemSize='4'> -->
-  <div class="scroll">  
+  <div class="scroll">
   <div id="paper">
       <img id='logo' src="https://img.collegepravesh.com/2018/11/SPIT-Mumbai-Logo.png" alt="SPIT logo" height=80px>
       <div style='text-align: center'>
@@ -38,8 +38,235 @@
       </div>
       <br><br>
       
+      <div *ngIf="course_details">
 
+        <div class="table-sm" id="list">
+          <table class="table">
+            <tbody>
+
+              <tr>
+                <th>Course Name</th>
+                <td>{{course_details.name}}</td>
+              </tr>
+
+              <tr>
+                <th>Course Code</th>
+                <td>{{course_details.code}}</td>
+              </tr>
+
+              <tr>
+                <th>Sessions of Course</th>
+                <td>{{course_details.session}}</td>
+              </tr>
+
+              <tr>
+                <th>Semester</th>
+                <td>{{course_details.semester}}</td>
+              </tr>
+
+              <tr>
+                  <th>Credits</th>
+                  <td>{{course_details.credits}}</td>
+              </tr>
+
+              <tr>
+                  <th>L:T:P</th>
+                  <td>{{course_details.ltp}}</td>
+              </tr>
+
+            </tbody>
+            <!-- <tbody>
+                <tr *ngFor="let q of ques.section2">
+                  <td class="one" *ngIf="q.num == 'a'; else fail">Q2</td>
+                  <ng-template #fail><td class="one"></td></ng-template>
+                  <td class="two"> {{ q.num }})  {{ q.question }}</td>
+                  <td class="three">{{ q.marks }}</td>
+                 <td class="four">{{ q.co }}</td>
+                </tr>
+              </tbody>
+              <tbody>
+                  <tr *ngFor="let q of ques.section3">
+                    <td class="one" *ngIf="q.num == 'a'; else fail">Q3</td>
+                    <ng-template #fail><td class="one"></td></ng-template>
+                    <td class="two"> {{ q.num }})  {{ q.question }}</td>
+                    <td class="three">{{ q.marks }}</td>
+                   <td class="four">{{ q.co }}</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                    <tr *ngFor="let q of ques.section4">
+                      <td class="one" *ngIf="q.num == 'a'; else fail">Q4</td>
+                      <ng-template #fail><td class="one"></td></ng-template>
+                      <td class="two"> {{ q.num }})  {{ q.question }}</td>
+                      <td class="three">{{ q.marks }}</td>
+                     <td class="four">{{ q.co }}</td>
+                    </tr>
+                  </tbody> -->
+          </table>
+
+        </div>
+        
+      </div>
+      <u><h6 class="space">Course Outcome</h6></u>
+
+      <div *ngIf="co && course_details">
+          <div class="table-sm" id="list">
+          <table class="table">
+
+            <tbody>
+              <tr>
+                <th>CO</th>
+                <th>Course Outcome</th>
+                <th>Cognitive Level</th>
+                <th>Class Sessions(No of Hours)</th>
+              </tr>
+
+              <tr *ngFor="let c of co;index as index">
+                <td>CO{{index+1}}</td>
+                <td>{{c.Course_Outcome}}</td>
+                <td>{{c.Cognitive_Level}}</td>
+                <td>{{c.No_of_hours}}</td>
+              </tr>
+
+              <tr>
+                  <th></th>
+                  <th>Total Hours of Instructions</th>
+                  <th></th>
+                  <th>{{course_details.session}}</th>
+                </tr>
+
+            </tbody>
+
+          </table>
+          </div>
+      </div><br><br>
+
+      <u><h6 class="space">CO-PO Mapping</h6></u>
+
+      <div *ngIf="co && course_details">
+          <div class="table-sm" id="list">
+          <table class="table">
+
+            <tbody>
+              <tr>
+                <th>CO</th>
+                <th>Course Outcome</th>
+                <th>PO/PSO</th>
+                <th>Class Sessions(No of Hours)</th>
+              </tr>
+
+              <tr *ngFor="let c of co;index as index">
+                <td>CO{{index+1}}</td>
+                <td>{{c.Course_Outcome}}</td>
+                <td><p *ngFor="let po of co[index].PO_map;p as index">{{po}},</p></td>
+                <td>{{c.No_of_hours}}</td>
+              </tr>
+
+              <tr>
+                  <th></th>
+                  <th>Total Hours of Instructions</th>
+                  <th></th>
+                  <th>{{course_details.session}}</th>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+      </div>
     </div>
+
+    <u><h6 class="space">CO-PO Correlation Matrix</h6></u>
+
+    <div *ngIf="co && course_details">
+        <div class="table-sm" id="list">
+        <table class="table">
+
+          <tbody>
+            <tr>
+              <th>CO</th>
+              <th>PO1</th>
+              <th>PO2</th>
+              <th>PO3</th>
+              <th>PO4</th>
+              <th>PO5</th>
+              <th>PO6</th>
+              <th>PO7</th>
+              <th>PO8</th>
+              <th>PO9</th>
+              <th>PO10</th>
+              <th>PO11</th>
+              <th>PO12</th>
+              <th>PSO1</th>
+              <th>PSO2</th>
+              <th>PSO3</th>
+            </tr>
+
+            <tr *ngFor="let c of co;index as index">
+              <td>CO{{index+1}}</td>
+                <td *ngFor="let po of PO,index as x">
+                  <div *ngIf="check(index,x)">
+                    <p class="{{x}}">{{c.No_of_hours}}</p>
+                </div>
+                <div *ngIf="!check(index,x)">
+                    <p></p>
+                </div>
+              </td>
+
+              <td *ngFor="let po of PSO,index as x">
+                  <div *ngIf="checkalt(index,x)">
+                    <p>HI</p>
+                </div>
+                <div *ngIf="!checkalt(index,x)">
+                    <p></p>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <th>Total Hours of Instructions</th>
+                <th></th>
+                <th>{{course_details.session}}</th>
+              </tr>
+
+          </tbody>
+
+        </table>
+
+       </div>
+      </div>
+
+      <u><h6 class="space">CO-PO Correlation Matrix</h6></u>
+
+      <div *ngIf="co && course_details">
+          <div class="table-sm" id="list">
+          <table class="table">
+  
+            <tbody>
+              <tr>
+                <th>CL</th>
+                <th>ISE-1</th>
+                <th>ISE-2</th>
+                <th>MSE</th>
+                <th>ESE</th>
+              </tr>
+  
+              <tr *ngFor="let c of co;index as index">
+                <td>CO{{index+1}}</td>
+                <td>{{c.ISE1}}</td>
+                <td>{{c.ISE2}}</td>
+                <td>{{c.MSE}}</td>
+                <td>{{c.ESE}}</td>
+              </tr>
+  
+            </tbody>
+  
+          </table>
+  
+         </div>
+        </div>
+  </div>
   </div>
 
     <!-- </cdk-virtual-scroll-viewport> -->

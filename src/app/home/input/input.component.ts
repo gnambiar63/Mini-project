@@ -14,13 +14,22 @@ export class InputComponent implements OnInit {
   CO_details : FormGroup;
   PO_details : FormGroup;
 
+  arrayItems: {
+    id: number;
+    title: string;
+  }[];
+
+  demoform:FormGroup;
   show = false;
   co:Array<CO>=[];
   marks_dist: FormGroup;
-  constructor(private fb:FormBuilder,private account_service:AccountService) { }
+  constructor(private fb:FormBuilder,private account_service:AccountService) {
+    this.demoform = this.fb.group({demoArray:this.fb.array([])})
+   }
 
   ngOnInit() {
     
+    this.co = [];
     this.course_details=this.fb.group({
       name:['',[Validators.required]],
       code:['',[Validators.required,]],
@@ -31,24 +40,29 @@ export class InputComponent implements OnInit {
       co:['',[Validators.required,]]
     })
   
-      
+      this.account_service.demo=this.course_details.valueChanges;
   }
   coursesubmit(){
     console.log("Ahead");
-    console.log(this.co);
+    console.log(this.course_details.value);
     this.co=this.account_service.co;
     for(let i=0;i<this.course_details.controls['co'].value;i++)
     {
       let val : CO = {
         Course_Outcome : "",
         Cognitive_Level : "",
-        No_of_hours : 0,
-        PO_map : []
+        No_of_hours : "",
+        PO_map : [],
+        ISE1 : [],
+        ISE2 : [],
+        MSE : [],
+        ESE : []
       };
       this.co.push(val);
 
-      this.account_service.co=this.co;
+      // this.account_service.course_details=this.course_details;
     }
+    this.account_service.co=this.co;
   }
 
 }
