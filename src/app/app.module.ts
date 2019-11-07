@@ -17,6 +17,7 @@ import { MaterialModule } from './material/material.module';
 import { CourseOutcomeComponent } from './home/input/course-outcome/course-outcome.component';
 import { COPOMappingComponent } from './home/input/co-po-mapping/co-po-mapping.component';
 import { MarksDistributionComponent } from './home/input/marks-distribution/marks-distribution.component';
+import { AttainmentComponent } from './home/input/attainment/attainment.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MarksDistributionComponent } from './home/input/marks-distribution/mark
     PaperComponent,
     CourseOutcomeComponent,
     COPOMappingComponent,
-    MarksDistributionComponent
+    MarksDistributionComponent,
+    AttainmentComponent
     
   ],
   imports: [

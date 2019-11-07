@@ -53,10 +53,18 @@ export class InputComponent implements OnInit {
         Cognitive_Level : "",
         No_of_hours : "",
         PO_map : [],
-        ISE1 : [],
-        ISE2 : [],
-        MSE : [],
-        ESE : []
+        ISE1 : 0,
+        ISE2 : 0,
+        MSE : 0,
+        ESE : 0,
+
+        ISE1A:0,
+        ISE2A:0,
+        MSEA:0,
+        ESEA:0,
+
+        p:0,
+        dv:0
       };
       this.co.push(val);
 

@@ -6,8 +6,16 @@ export interface CO{
     No_of_hours:string;
     // PO_map:Array<PO>;
     PO_map:Array<string>;
-    ISE1:Array<number>;
-    ISE2:Array<number>;
-    MSE:Array<number>;
-    ESE:Array<number>;
+    ISE1:number;
+    ISE2:number;
+    MSE:number;
+    ESE:number;
+
+    ISE1A:number;
+    ISE2A:number;
+    MSEA:number;
+    ESEA:number;
+
+    p:number;
+    dv:number;
 }

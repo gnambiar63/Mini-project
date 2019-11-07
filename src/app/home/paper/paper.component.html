@@ -1,12 +1,17 @@
-<!-- <cdk-virtual-scroll-viewport id='paper' itemSize='4'> -->
-  <div class="scroll">
-  <div id="paper">
-      <img id='logo' src="https://img.collegepravesh.com/2018/11/SPIT-Mumbai-Logo.png" alt="SPIT logo" height=80px>
-      <div style='text-align: center'>
+<!-- <cdk-virtual-scroll-viewport id='demo' itemSize='4'> -->
+  
+    <button type="button" style="margin:5px;" class="btn btn-info" (click)="paper()">Print</button>
+    <div class="scroll">
+    <div id="paper">
+    <div style='text-align: center'>
+        <img id='logo' src="https://img.collegepravesh.com/2018/11/SPIT-Mumbai-Logo.png" alt="SPIT logo" height=80px>
         <h4>Sardar Patel Institute of Technology</h4>
         <p>Bhavan's Campus, Munshi Nagar, Andheri West, Mumbai - 400058</p>
+        <h5>Outcome Based Evaluation</h5>
+        <h5>Year 2019-20</h5>
+        <h5>Phase-1 Planning</h5>
       </div>
-      <div id='info'>
+      <!-- <div id='info'>
         <div style='margin-top: 2%;text-align: center'>
           <h5>End Semester Examination</h5>
           <p>{{ semMonth }}</p>
@@ -34,8 +39,8 @@
           <ul>
             <li *ngFor="let i of instructions;index as num">{{ num+1 }}. {{ i }}</li>
           </ul>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <br><br>
       
       <div *ngIf="course_details">
@@ -223,12 +228,6 @@
               </td>
             </tr>
 
-            <tr>
-                <th></th>
-                <th>Total Hours of Instructions</th>
-                <th></th>
-                <th>{{course_details.session}}</th>
-              </tr>
 
           </tbody>
 
@@ -237,7 +236,7 @@
        </div>
       </div>
 
-      <u><h6 class="space">CO-PO Correlation Matrix</h6></u>
+      <u><h6 class="space">Plan:</h6></u>
 
       <div *ngIf="co && course_details">
           <div class="table-sm" id="list">
@@ -266,6 +265,103 @@
   
          </div>
         </div>
+
+        <h5 style="text-align: center;">PHASE II: ATTAINMENT</h5>
+
+        <div *ngIf="co && course_details">
+            <div class="table-sm" id="list">
+            <table class="table">
+    
+              <tbody>
+                <tr>
+                  <th>CL</th>
+                  <th>IE</th>
+                  <!-- <th>IE</th> -->
+                  <th>MSE</th>
+                  <th>ESE</th>
+                </tr>
+    
+                <tr *ngFor="let c of co;index as index">
+                  <td>CO{{index+1}}</td>
+                  <td>{{1*c.ISE1A + 1*c.ISE2A}}/{{0.01*c.ISE1*10 + 0.01*c.ISE2*10}} = {{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)}}%</td>
+                  <!-- <td>{{c.ISE2A}}</td> -->
+                  <td>{{c.MSEA}}/{{0.01*c.MSE*20}} = {{100*(c.MSEA)/(0.01*c.MSE*20)}}%</td>
+                  <td>{{c.ESEA}}/{{0.01*c.ESE*60}} = {{100*(c.ESEA)/(0.01*c.ESE*60)}}%</td>
+                </tr>
+    
+              </tbody>
+    
+            </table>
+    
+           </div>
+          </div>
+
+          <u><h6 class="space">Computation of CO Direct Attainment in the course Strength of Materials</h6></u>
+
+          <div *ngIf="co && course_details">
+              <div class="table-sm" id="list">
+              <table class="table">
+      
+                <tbody>
+                  <tr>
+                    <th>CL</th>
+                    <th>IE</th>
+                    <!-- <th>IE</th> -->
+                    <th>MSE</th>
+                    <th>ESE</th>
+                    <th>(0.10 IE Cl. Avg.) + (0.30*MSE Cl. Avg.)+ (0.60*ESE Cl. Avg.)</th>
+                    <th>Direct CO Attainment In %</th>
+                  </tr>
+      
+                  <tr *ngFor="let c of co;index as index">
+                    <td>CO{{index+1}}</td>
+                    <td>{{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)}}%</td>
+                    <!-- <td>{{c.ISE2A}}</td> -->
+                    <td>{{100*(c.MSEA)/(0.01*c.MSE*20)}}%</td>
+                    <td>{{100*(c.ESEA)/(0.01*c.ESE*60)}}%</td>
+                    <td >{{0.1*(100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)) + 0.3*100*(c.MSEA)/(0.01*c.MSE*20) + 0.6*100*(c.ESEA)/(0.01*c.ESE*60)}} out of {{c.p}}</td>
+                    <td >{{c.dv}}</td>
+                  </tr>
+      
+                </tbody>
+      
+              </table>
+      
+             </div>
+            </div>
+
+            <u><h6 class="space">CO Attainment and Attainment Gap Modification of target where achieved</h6></u>
+
+            <div *ngIf="co && course_details">
+                <div class="table-sm" id="list">
+                <table class="table">
+        
+                  <tbody>
+                    <tr>
+                      <th>CL</th>
+                      <th>Direct CO Assignment</th>
+                      <!-- <th>IE</th> -->
+                      <th>CO Target</th>
+                      <th>CO Attainment Gap</th>
+                      <th>Required to Modify target Yes/No</th>
+                    </tr>
+        
+                    <tr *ngFor="let c of co;index as index">
+                      <td>CO{{index+1}}</td>
+                      <td>{{c.dv}}</td>
+                      <!-- <td>{{c.ISE2A}}</td> -->
+                      <td>60</td>
+                      <td>{{c.dv-60}}</td>
+                      <td *ngIf="!yesno(index)">Yes</td>
+                      <td *ngIf="yesno(index)">No</td>
+                    </tr>
+        
+                  </tbody>
+        
+                </table>
+        
+               </div>
+              </div>
   </div>
   </div>
 

@@ -18,10 +18,10 @@
     }
   }
   #paper {
-    width:750px;
-    height:842px;
-    /* width:100%; */
-    /* height:100%; */
+    /* width:750px;
+    height:842px; */
+    width:100%;
+    height:250%;
     color: black;
     /* // border: 2px solid red; */
     background: white;
