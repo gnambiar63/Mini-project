@@ -9,26 +9,26 @@ import { CO } from 'src/app/shared/CO.model';
   styleUrls: ['./paper.component.css']
 })
 export class PaperComponent implements OnInit {
-  current = null;
-  semMonth = 'Nov/Dec. 2018';
-  marks = 80;
-  class = 'T.E';
-  courseCode = 'IT52';
-  course = 'Computer Networks';
-  duration = '180 Minutes';
-  sem = 'V';
-  branch = 'IT';
+  // current = null;
+  // semMonth = 'Nov/Dec. 2018';
+  // marks = 80;
+  // class = 'T.E';
+  // courseCode = 'IT52';
+  // course = 'Computer Networks';
+  // duration = '180 Minutes';
+  // sem = 'V';
+  // branch = 'IT';
 
 
   show_details:boolean=false;
   course_details : FormGroup;
   
   
-  instructions = [
-    'All Questions are Compulsory',
-    'Draw neat diagrams',
-    'Assume suitable data if necessary'
-  ];
+  // instructions = [
+  //   'All Questions are Compulsory',
+  //   'Draw neat diagrams',
+  //   'Assume suitable data if necessary'
+  // ];
 
   co:Array<CO>;
 
