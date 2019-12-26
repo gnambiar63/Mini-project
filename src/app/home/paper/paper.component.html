@@ -209,7 +209,7 @@
 
             <tr *ngFor="let c of co;index as index">
               <td>CO{{index+1}}</td>
-                <td *ngFor="let po of PO,index as x">
+                <td *ngFor="let p of PO,index as x">
                   <div *ngIf="check(index,x)">
                     <p class="{{x}}">{{c.No_of_hours}}</p>
                 </div>
@@ -218,7 +218,7 @@
                 </div>
               </td>
 
-              <td *ngFor="let po of PSO,index as x">
+              <td *ngFor="let p of PSO,index as x">
                   <div *ngIf="checkalt(index,x)">
                     <p>{{c.No_of_hours}}</p>
                 </div>
@@ -227,6 +227,14 @@
                 </div>
               </td>
             </tr>
+
+            <tr>
+
+              <td>Total</td>
+              <td *ngFor="let p of po;index as index">
+                <p>{{p.Total_Sessions}}</p>
+            </td>
+          </tr>
 
 
           </tbody>

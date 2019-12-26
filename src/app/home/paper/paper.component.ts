@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/shared/account.service';
 import { FormGroup } from '@angular/forms';
 import { CO } from 'src/app/shared/CO.model';
+import { PO } from 'src/app/shared/PO.model';
 
 @Component({
   selector: 'app-paper',
@@ -19,6 +20,9 @@ export class PaperComponent implements OnInit {
   // sem = 'V';
   // branch = 'IT';
 
+  PO_total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  confirm_total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 
   show_details:boolean=false;
   course_details : FormGroup;
@@ -31,6 +35,7 @@ export class PaperComponent implements OnInit {
   // ];
 
   co:Array<CO>;
+  po:Array<PO>;
 
   PO:Array<number>=[1,2,3,4,5,6,7,8,9,10,11,12];
   PSO:Array<number>=[1,2,3];
@@ -43,6 +48,8 @@ export class PaperComponent implements OnInit {
         console.log(this.co);
       });
 
+      this.po = this.account_service.po;
+
   }
   
   testing=false;
@@ -50,6 +57,8 @@ export class PaperComponent implements OnInit {
 
   ngOnInit() {
     // this.course_details=this.account_service.course_details;
+    this.po = this.account_service.po;
+    
     this.account_service.demo.subscribe(
       (res)=>{
         this.course_details=res;
@@ -64,15 +73,24 @@ export class PaperComponent implements OnInit {
   {
     console.log(this.co)
     this.co=this.account_service.co;
+    this.po=this.account_service.po;
     console.log(this.co)
     this.testing=true;
   }
 
-  check(index,x)
+  check(index,x) //Only forward totalling updation possible not backwards
   {
     if(this.co[index].PO_map.includes("PO"+(x+1)))
     {
       // console.log('true');
+      if(this.confirm_total[x]<=index)
+      {
+        this.PO_total[x] += Number(this.co[index].No_of_hours); 
+        this.confirm_total[x]=index+1;
+        console.log("worked")
+      }
+      // console.log(this.PO_total)
+      // console.log(index+":"+x)
       return true;
     }
     else
@@ -88,6 +106,12 @@ export class PaperComponent implements OnInit {
     if(this.co[index].PO_map.includes("PSO"+(x+1)))
     {
       // console.log('true');
+      if(this.confirm_total[x+12]<=index)
+      {
+        this.PO_total[x+12] += Number(this.co[index].No_of_hours); 
+        this.confirm_total[x+12]+=1;
+        console.log("worked")
+      }
       return true;
     }
     else

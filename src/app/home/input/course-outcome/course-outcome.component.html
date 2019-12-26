@@ -1,5 +1,5 @@
 <p style="text-align: center;"><strong>Details of each CO</strong></p>
-                <mat-horizontal-stepper linear class="step">
+                <mat-horizontal-stepper #stepper linear class="step">
                 <div class="co_details"  *ngFor="let i of co;index as num">
                     <mat-step label="CO{{num+1}}">
                         <p style="text-align: center;"><strong>Course Details</strong></p>

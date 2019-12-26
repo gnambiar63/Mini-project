@@ -14,11 +14,17 @@
                                 <div class="input-group mb-3">
                                     <input id="po_pso" formControlName="po_pso" type="text" class="form-control">
                                     <div class="input-group-append">
-                                        <button class="btn btn-sm btn-info">Add</button>
+                                        <button class="btn btn-sm btn-info" type="submit">Add</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        <div class="center">    
+                            <button class="btn btn-sm btn-info" matStepperNext>Move To Next</button>
+                        </div>
                     </mat-step>
                     </div>
             </mat-horizontal-stepper>
+            <div class="center">    
+                <button class="btn btn-sm btn-primary" (click)="Addup($event)" matStepperNext>Proceed</button>
+            </div>

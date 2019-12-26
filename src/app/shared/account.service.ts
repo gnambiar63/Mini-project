@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CO } from 'src/app/shared/CO.model';
+import { PO } from 'src/app/shared/PO.model';
 import { FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -12,11 +13,14 @@ export class AccountService {
 
   private data : string = '';
 
+
   co:Array<CO>=[];
+  po:Array<PO>=[];
   course_details : FormGroup;
   public demo:Observable<any>;
   public CO_data:Array<Observable<any>>
   public time:Observable<any>; 
+  public sum:number = 0;
 
 
 
@@ -46,6 +50,21 @@ export class AccountService {
   change() {
     console.log('change started'); 
      this.fire.emit(this.co);
+   }
+
+   PO_Total()
+   {
+      for(let i=0;i<15;i++)
+      {
+        this.sum = 0;
+        this.po[i].CO_list.forEach((item)=>
+        {  
+           //console.log(this.sum) 
+           this.sum += Number(this.co[item].No_of_hours) 
+        });
+        this.po[i].Total_Sessions = this.sum
+        //Level Left
+      }
    }
 
    getEmittedValue() {

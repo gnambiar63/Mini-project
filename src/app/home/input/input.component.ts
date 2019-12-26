@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CO } from 'src/app/shared/CO.model';
 import { AccountService } from 'src/app/shared/account.service';
+import { PO } from 'src/app/shared/PO.model';
 
 @Component({
   selector: 'app-input',
@@ -22,6 +23,7 @@ export class InputComponent implements OnInit {
   demoform:FormGroup;
   show = false;
   co:Array<CO>=[];
+  po:Array<PO>=[];
   marks_dist: FormGroup;
   constructor(private fb:FormBuilder,private account_service:AccountService) {
     this.demoform = this.fb.group({demoArray:this.fb.array([])})
@@ -46,31 +48,62 @@ export class InputComponent implements OnInit {
     console.log("Ahead");
     console.log(this.course_details.value);
     this.co=this.account_service.co;
-    for(let i=0;i<this.course_details.controls['co'].value;i++)
+    this.po=this.account_service.po;
+
+    var addvar = this.course_details.controls['co'].value - this.co.length;
+
+    for(let i=0;i<15;i++)
     {
-      let val : CO = {
-        Course_Outcome : "",
-        Cognitive_Level : "",
-        No_of_hours : "",
-        PO_map : [],
-        ISE1 : 0,
-        ISE2 : 0,
-        MSE : 0,
-        ESE : 0,
-
-        ISE1A:0,
-        ISE2A:0,
-        MSEA:0,
-        ESEA:0,
-
-        p:0,
-        dv:0
+      let val : PO = {
+        Description : "",
+        Verbs : "",
+        CO_list : [],
+        Justification : "",
+        Total_Sessions:0,
+        Level:0
       };
-      this.co.push(val);
-
-      // this.account_service.course_details=this.course_details;
+      this.po.push(val);
     }
+
+    if(addvar >= 0)
+    {
+      for(let i=0;i<(addvar);i++)
+      {
+        let val : CO = {
+          Course_Outcome : "",
+          Cognitive_Level : "",
+          No_of_hours : "",
+          PO_map : [],
+          ISE1 : 0,
+          ISE2 : 0,
+          MSE : 0,
+          ESE : 0,
+  
+          ISE1A:0,
+          ISE2A:0,
+          MSEA:0,
+          ESEA:0,
+  
+          p:0,
+          dv:0
+        };
+        this.co.push(val);
+  
+        // this.account_service.course_details=this.course_details;
+      }
+    }
+
+    else
+    {
+      for(let i = 0;i<Math.abs(addvar);i++)
+      {
+        this.co.pop();
+      }
+      console.log(this.co.length)
+    }
+    
     this.account_service.co=this.co;
+    this.account_service.po=this.po;
   }
 
 }

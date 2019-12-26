@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-course-outcome',
   templateUrl: './course-outcome.component.html',
   styleUrls: ['./course-outcome.component.css']
 })
-export class CourseOutcomeComponent implements OnInit {
+export class CourseOutcomeComponent implements OnInit,AfterViewInit {
 
+  @ViewChild('stepper',{static: false}) stepper:MatStepper;
+
+  ngAfterViewInit() {
+    //small bug where deleting stepper contents while stepper index greater than or equal to the one 
+    // deleted causes freezing
+    if(this.stepper._steps.length!=0)
+    {
+      this.stepper.selectedIndex = 1;
+    }  
+    console.log('Now on Index 2');
+  }
+  
   CO_details:FormGroup;
   test:FormGroup;
   co:Array<CO>;
@@ -18,6 +31,8 @@ export class CourseOutcomeComponent implements OnInit {
 
 
   ngOnInit() {
+
+    
     
   this.CO_details=this.fb.group({
     Course_Outcome:['',[Validators.required]],
