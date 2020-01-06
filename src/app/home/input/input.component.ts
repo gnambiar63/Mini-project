@@ -25,11 +25,27 @@ export class InputComponent implements OnInit {
   co:Array<CO>=[];
   po:Array<PO>=[];
   marks_dist: FormGroup;
+
+  
   constructor(private fb:FormBuilder,private account_service:AccountService) {
     this.demoform = this.fb.group({demoArray:this.fb.array([])})
    }
 
   ngOnInit() {
+    for(let i=0;i<15;i++)
+    {
+      let val : PO = {
+        Description : "",
+        Verbs : "",
+        CO_list : [],
+        Justification : "",
+        Total_Sessions:0,
+        Level:0
+      };
+      this.po.push(val);
+    }
+    this.account_service.po=this.po;
+
     
     this.co = [];
     this.course_details=this.fb.group({
@@ -50,20 +66,10 @@ export class InputComponent implements OnInit {
     this.co=this.account_service.co;
     this.po=this.account_service.po;
 
+    this.account_service.course_details=this.course_details;
+
     var addvar = this.course_details.controls['co'].value - this.co.length;
 
-    for(let i=0;i<15;i++)
-    {
-      let val : PO = {
-        Description : "",
-        Verbs : "",
-        CO_list : [],
-        Justification : "",
-        Total_Sessions:0,
-        Level:0
-      };
-      this.po.push(val);
-    }
 
     if(addvar >= 0)
     {
@@ -103,7 +109,6 @@ export class InputComponent implements OnInit {
     }
     
     this.account_service.co=this.co;
-    this.account_service.po=this.po;
   }
 
 }

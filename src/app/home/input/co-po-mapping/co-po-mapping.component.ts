@@ -43,6 +43,7 @@ export class COPOMappingComponent implements OnInit {
       if(x>=1 && x<=12)
       {
         this.po[x-1].CO_list.push(num);
+        this.po[x-1].CO_list.sort();
         this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
 
       }
@@ -56,6 +57,7 @@ export class COPOMappingComponent implements OnInit {
       if(x>=1 && x<=3)
       {
         this.po[x+11].CO_list.push(num);
+        this.po[x+11].CO_list.sort();
         this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
       }
     }
@@ -65,6 +67,7 @@ export class COPOMappingComponent implements OnInit {
         alert('PO/PSO entered is invalid');
       }
     
+      console.log(this.account_service.po);
     
     //this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
     console.log(this.co[num].PO_map);

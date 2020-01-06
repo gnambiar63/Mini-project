@@ -229,12 +229,18 @@
             </tr>
 
             <tr>
-
               <td>Total</td>
               <td *ngFor="let p of po;index as index">
                 <p>{{p.Total_Sessions}}</p>
-            </td>
-          </tr>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Level</td>
+              <td *ngFor="let p of po;index as index">
+                <p>{{p.Level}}</p>
+              </td>
+            </tr>
 
 
           </tbody>
@@ -288,13 +294,14 @@
                   <th>MSE</th>
                   <th>ESE</th>
                 </tr>
-    
-                <tr *ngFor="let c of co;index as index">
+
+                <!-- pipe used to round off decimal to 2 places , min digits before decimal.min digits after decimal-max after decimal -->
+                <tr *ngFor="let c of co;index as index">  
                   <td>CO{{index+1}}</td>
-                  <td>{{1*c.ISE1A + 1*c.ISE2A}}/{{0.01*c.ISE1*10 + 0.01*c.ISE2*10}} = {{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)}}%</td>
+                  <td>{{1*c.ISE1A + 1*c.ISE2A}}/{{0.01*c.ISE1*10 + 0.01*c.ISE2*10}} = {{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10) | number : '1.2-2' }}%</td>
                   <!-- <td>{{c.ISE2A}}</td> -->
-                  <td>{{c.MSEA}}/{{0.01*c.MSE*20}} = {{100*(c.MSEA)/(0.01*c.MSE*20)}}%</td>
-                  <td>{{c.ESEA}}/{{0.01*c.ESE*60}} = {{100*(c.ESEA)/(0.01*c.ESE*60)}}%</td>
+                  <td>{{c.MSEA}}/{{0.01*c.MSE*20}} = {{100*(c.MSEA)/(0.01*c.MSE*20) | number : '1.2-2' }}%</td>
+                  <td>{{c.ESEA}}/{{0.01*c.ESE*60}} = {{100*(c.ESEA)/(0.01*c.ESE*60) | number : '1.2-2' }}%</td>
                 </tr>
     
               </tbody>
@@ -323,11 +330,11 @@
       
                   <tr *ngFor="let c of co;index as index">
                     <td>CO{{index+1}}</td>
-                    <td>{{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)}}%</td>
+                    <td>{{100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10) | number : '1.2-2' }}%</td>
                     <!-- <td>{{c.ISE2A}}</td> -->
-                    <td>{{100*(c.MSEA)/(0.01*c.MSE*20)}}%</td>
-                    <td>{{100*(c.ESEA)/(0.01*c.ESE*60)}}%</td>
-                    <td >{{0.1*(100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)) + 0.3*100*(c.MSEA)/(0.01*c.MSE*20) + 0.6*100*(c.ESEA)/(0.01*c.ESE*60)}} out of {{c.p}}</td>
+                    <td>{{100*(c.MSEA)/(0.01*c.MSE*20) | number : '1.2-2' }}%</td>
+                    <td>{{100*(c.ESEA)/(0.01*c.ESE*60) | number : '1.2-2' }}%</td>
+                    <td >{{0.1*(100*(1*c.ISE1A + 1*c.ISE2A)/(0.01*c.ISE1*10 + 0.01*c.ISE2*10)) + 0.3*100*(c.MSEA)/(0.01*c.MSE*20) + 0.6*100*(c.ESEA)/(0.01*c.ESE*60) | number : '1.2-2' }} out of {{c.p}}</td>
                     <td >{{c.dv}}</td>
                   </tr>
       
