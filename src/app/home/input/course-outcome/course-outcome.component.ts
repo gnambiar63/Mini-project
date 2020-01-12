@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
@@ -12,15 +12,34 @@ import { MatStepper } from '@angular/material';
 export class CourseOutcomeComponent implements OnInit,AfterViewInit {
 
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
+  @ViewChild('btn',{static: false}) button;
+  @ViewChild('ref',{static: false}) reference:ElementRef;
 
-  ngAfterViewInit() {
-    //small bug where deleting stepper contents while stepper index greater than or equal to the one 
+
+  //small bug where deleting stepper contents while stepper index greater than or equal to the one 
     // deleted causes freezing
-    if(this.stepper._steps.length!=0)
+  
+  ngAfterViewInit() {
+    // if(this.stepper.selectedIndex != this.stepper._steps.length-1)
+    //   {
+    //     this.button.nativeElement.disabled = true;
+    //   }
+    //   else{
+    //     this.button.nativeElement.enabled = true;
+    //   }
+  }
+
+  access(event : Event,i)
+  {
+    console.log(i);
+    if(i >= this.stepper._steps.length-1)
     {
-      this.stepper.selectedIndex = 1;
-    }  
-    console.log('Now on Index 2');
+      this.button.nativeElement.disabled = false;
+      this.reference.nativeElement.innerText = 'Save Changes';  //Does not work for some reason
+
+      // this.button2.nativeElement.disabled = true;
+      // this.secbutton.nativeElement.disabled = true;
+    }
   }
   
   CO_details:FormGroup;
@@ -32,7 +51,16 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
 
-    
+    // if(this.stepper)
+    // {
+    //   if(this.stepper.selectedIndex != this.stepper._steps.length-1)
+    //   {
+    //     this.button.nativeElement.disabled = true;
+    //   }
+    //   else{
+    //     this.button.nativeElement.disabled = false;
+    //   }
+    // }
     
   this.CO_details=this.fb.group({
     Course_Outcome:['',[Validators.required]],

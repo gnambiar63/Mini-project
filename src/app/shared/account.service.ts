@@ -18,6 +18,7 @@ export class AccountService {
   po:Array<PO>=[];
   course_details : FormGroup;
   public demo:Observable<any>;
+  public course_exit:Observable<any>;
   public CO_data:Array<Observable<any>>
   public time:Observable<any>; 
   public sum:number = 0;
@@ -52,6 +53,57 @@ export class AccountService {
      this.fire.emit(this.co);
    }
 
+   Direct_PO()
+   {
+    for(let i=0;i<15;i++)
+    {
+      if(this.po[i].CO_list.length != 0)
+      {
+        this.po[i].CO_list.forEach((item)=>
+        {  
+           //console.log(this.sum) 
+           this.po[i].Direct_PO += Number(this.co[item].dv) 
+        });
+        this.po[i].Direct_PO /= this.po[i].CO_list.length;
+      }
+    }
+   }
+
+   Indirect_PO()
+   {
+    for(let i=0;i<15;i++)
+    {
+      if(this.po[i].CO_list.length != 0)
+      {
+        this.po[i].CO_list.forEach((item)=>
+        {  
+           //console.log(this.sum) 
+           this.po[i].Indirect_PO += Number(((this.co[item].course_exit[2])*3 + (this.co[item].course_exit[1])*2 + (this.co[item].course_exit[0])*1)/((this.co[item].course_exit[2]*1 + this.co[item].course_exit[1]*1 + this.co[item].course_exit[0]*1)*3)*100) 
+        });
+        this.po[i].Indirect_PO /= this.po[i].CO_list.length;
+        // console.log(this.po[i].Indirect_PO);
+        this.po[i].L1=this.Attainment_Calculation(this.po[i].Direct_PO)
+        this.po[i].L2=this.Attainment_Calculation(this.po[i].Indirect_PO)
+      }
+    }
+   }
+
+   Attainment_Calculation(x)
+   {
+     if(x>=60)
+     {
+        return 3;
+     }
+     else if(x>=40 && x<60)
+     {
+      return 2;
+     }
+     else{
+      return 1;
+     }
+   }
+
+
    PO_Total()
    {
       for(let i=0;i<15;i++)
@@ -80,6 +132,10 @@ export class AccountService {
         {
           this.po[i].Level = 2;
         }
+        else if(this.po[i].Total_Sessions == 0)
+        {
+          this.po[i].Level = 0;
+        }
         else{
           this.po[i].Level = 1;
         }
@@ -95,6 +151,10 @@ export class AccountService {
         {
           this.po[i].Level = 2;
         }
+        else if(this.po[i].Total_Sessions == 0)
+        {
+          this.po[i].Level = 0;
+        }
         else{
           this.po[i].Level = 1;
         }
@@ -109,6 +169,10 @@ export class AccountService {
         else if(this.po[i].Total_Sessions >=10)
         {
           this.po[i].Level = 2;
+        }
+        else if(this.po[i].Total_Sessions == 0)
+        {
+          this.po[i].Level = 0;
         }
         else{
           this.po[i].Level = 1;

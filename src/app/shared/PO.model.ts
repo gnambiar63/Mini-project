@@ -5,4 +5,9 @@ export interface PO{
     CO_list:Array<number>;
     Total_Sessions:number;
     Level:number;
+    Direct_PO:number;
+    Indirect_PO:number;
+    L1:number;
+    L2:number;
+
 }

@@ -56,7 +56,12 @@ export class AttainmentComponent implements OnInit {
         console.log('ESEtrue');
       }
       
-      this.account_service.co[num].dv=100*((0.1*(100*(1*this.account_service.co[num].ISE1A + 1*this.account_service.co[num].ISE2A)/(0.01*this.account_service.co[num].ISE1*10 + 0.01*this.account_service.co[num].ISE2*10)) + 0.3*100*(this.account_service.co[num].MSEA)/(0.01*this.account_service.co[num].MSE*20) + 0.6*100*(this.account_service.co[num].ESEA)/(0.01*this.account_service.co[num].ESE*60))/(this.account_service.co[num].p))
+      this.account_service.co[num].dv=100*((0.1*(100*(1*this.account_service.co[num].ISE1A + 1*this.account_service.co[num].ISE2A)/(this.account_service.co[num].ISE1*1 + this.account_service.co[num].ISE2*1)) + 0.3*100*(this.account_service.co[num].MSEA)/(this.account_service.co[num].MSE*1) + 0.6*100*(this.account_service.co[num].ESEA)/(this.account_service.co[num].ESE*1))/(this.account_service.co[num].p))
+  }
+
+  Update_Direct_PO(event : Event)
+  {
+    this.account_service.Direct_PO();
   }
 
 }

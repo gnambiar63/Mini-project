@@ -40,7 +40,11 @@ export class InputComponent implements OnInit {
         CO_list : [],
         Justification : "",
         Total_Sessions:0,
-        Level:0
+        Level:0,
+        Direct_PO:0,
+        Indirect_PO:0,
+        L1:0,
+        L2:0
       };
       this.po.push(val);
     }
@@ -91,7 +95,8 @@ export class InputComponent implements OnInit {
           ESEA:0,
   
           p:0,
-          dv:0
+          dv:0,
+          course_exit : [0,0,0]
         };
         this.co.push(val);
   

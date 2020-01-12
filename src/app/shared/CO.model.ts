@@ -18,4 +18,5 @@ export interface CO{
 
     p:number;
     dv:number;
+    course_exit:Array<number>;
 }
