@@ -76,7 +76,28 @@ export class COPOMappingComponent implements OnInit {
   }
   
   del(event,index,num){
+    console.log(index+1);
+    var x = this.co[num].PO_map[index].toString();
     this.co[num].PO_map.splice(index,1);
+
+    console.log(x);
+
+    if((x.substr(0,2)).localeCompare("PO") == 0)
+    {
+      index = Number(x.substring(2));
+    }
+    else
+    {
+      index = Number(x.substring(3));
+    }
+    index-=1;
+    console.log(index);
+
+
+    const loc = this.po[index].CO_list.indexOf(num);
+    this.po[index].CO_list.splice(loc,1);
+    // console.log(this.po[index].CO_list)
+    // console.log(index)
     this.account_service.changeMessage(this.co)
   }
 

@@ -40,7 +40,7 @@ export class AttainmentComponent implements OnInit {
    this.account_service.co[num].MSEA=this.marks_dist.controls['MSE'].value;
    this.account_service.co[num].ESEA=this.marks_dist.controls['ESE'].value;
 
-   if(this.account_service.co[num].ISE1A>0 || this.account_service.co[num].ISE2A > 0)
+      if(this.account_service.co[num].ISE1A>0 || this.account_service.co[num].ISE2A > 0)
       {
         this.account_service.co[num].p=this.account_service.co[num].p+20;
         console.log('ISEtrue');
@@ -55,8 +55,29 @@ export class AttainmentComponent implements OnInit {
         this.account_service.co[num].p=this.account_service.co[num].p+60;
         console.log('ESEtrue');
       }
+
+      var x = (100*(1*this.account_service.co[num].ISE1A + 1*this.account_service.co[num].ISE2A)/(this.account_service.co[num].ISE1*1 + this.account_service.co[num].ISE2*1));
+
+      var y = 100*(this.account_service.co[num].MSEA)/(this.account_service.co[num].MSE*1);
+
+      var z = 100*(this.account_service.co[num].ESEA)/(this.account_service.co[num].ESE*1);
       
-      this.account_service.co[num].dv=100*((0.1*(100*(1*this.account_service.co[num].ISE1A + 1*this.account_service.co[num].ISE2A)/(this.account_service.co[num].ISE1*1 + this.account_service.co[num].ISE2*1)) + 0.3*100*(this.account_service.co[num].MSEA)/(this.account_service.co[num].MSE*1) + 0.6*100*(this.account_service.co[num].ESEA)/(this.account_service.co[num].ESE*1))/(this.account_service.co[num].p))
+      if((this.account_service.co[num].ISE1*1 + this.account_service.co[num].ISE2*1) == 0)
+      {
+        x = 0;
+      }
+
+      if((this.account_service.co[num].MSE*1) == 0)
+      {
+        y = 0;
+      }
+
+      if(this.account_service.co[num].ESE*1 == 0)
+      {
+        z = 0;
+      }
+      this.account_service.co[num].obt=(0.1*x + 0.3*y + 0.6*z);
+      this.account_service.co[num].dv=100*((0.1*x + 0.3*y + 0.6*z)/(this.account_service.co[num].p))
   }
 
   Update_Direct_PO(event : Event)

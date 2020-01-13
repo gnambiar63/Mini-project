@@ -1,4 +1,5 @@
 1.Changing CO amount from higher to lower number causes the stepper to be stuck
 2.Button inside stepper(next button) is not affected by View Child
-3.0/0 implementation required.
+3.0/0 implementation required.(Done)
 4.Paper scaling issues.
+5.Logout button bug.

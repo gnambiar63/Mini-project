@@ -311,11 +311,16 @@
             <!-- pipe used to round off decimal to 2 places , min digits before decimal.min digits after decimal-max after decimal -->
             <tr *ngFor="let c of co;index as index">
               <td>CO{{index+1}}</td>
-              <td>{{1*c.ISE1A + 1*c.ISE2A}}/{{c.ISE1*1 + c.ISE2*1}} =
+              <td *ngIf="c.ISE1*1 + c.ISE2*1 != 0">{{1*c.ISE1A + 1*c.ISE2A}}/{{c.ISE1*1 + c.ISE2*1}} =
                 {{100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.ISE1*1 + c.ISE2*1 === 0"> </td>
               <!-- <td>{{c.ISE2A}}</td> -->
-              <td>{{c.MSEA}}/{{c.MSE*1}} = {{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
-              <td>{{c.ESEA}}/{{c.ESE*1}} = {{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.MSE*1 != 0">{{c.MSEA}}/{{c.MSE*1}} = {{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.MSE*1 === 0"> </td>
+
+              <td *ngIf="c.ESE*1 != 0">{{c.ESEA}}/{{c.ESE*1}} = {{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.ESE*1 === 0"> </td>
+
             </tr>
 
           </tbody>
@@ -346,13 +351,18 @@
 
             <tr *ngFor="let c of co;index as index">
               <td>CO{{index+1}}</td>
-              <td>{{100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.ISE1*1 + c.ISE2*1 != 0">{{100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.ISE1*1 + c.ISE2*1 === 0"> </td>
+
               <!-- <td>{{c.ISE2A}}</td> -->
-              <td>{{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
-              <td>{{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.MSE*1 != 0">{{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.MSE*1 === 0"> </td>
+
+              <td *ngIf="c.ESE*1 != 0">{{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
+              <td *ngIf="c.ESE*1 === 0"> </td>
+
               <td>
-                {{0.1*(100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1)) + 0.3*100*(c.MSEA)/(c.MSE*1) + 0.6*100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}
-                out of {{c.p}}</td>
+                {{c.obt | number : '1.2-2' }} out of {{c.p}}</td>
               <td>{{c.dv}}</td>
             </tr>
 

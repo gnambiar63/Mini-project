@@ -95,6 +95,7 @@ export class InputComponent implements OnInit {
           ESEA:0,
   
           p:0,
+          obt:0,
           dv:0,
           course_exit : [0,0,0]
         };
