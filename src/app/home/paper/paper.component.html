@@ -425,7 +425,8 @@
             <ng-container *ngFor="let p of po;index as i">
               <tr *ngIf="p.CO_list.length != 0">
                 <!-- <div *ngIf="p"> -->
-                  <td [attr.rowspan] = "p.CO_list.length">PO{{ i+1 }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length" *ngIf="i < 12">PO{{ i+1 }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length" *ngIf="i>=12">PSO{{ i-11 }}</td>
                   <td>CO{{ p.CO_list[0]+1 }}</td>
                   <td>{{ co[p.CO_list[0]].dv   | number : '1.2-2'  }}</td>
                   <td [attr.rowspan] = "p.CO_list.length">{{ p.Direct_PO   | number : '1.2-2'  }}</td>
@@ -545,7 +546,7 @@
             <tr> 
               <td>D:Attainment(Direct)</td> 
               <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.Direct_PO}}</td>
+                  <td>{{p.Direct_PO | number : '1.2-2' }}</td>
               </ng-container>
             </tr>
 
@@ -559,7 +560,7 @@
             <tr> 
               <td>I:Attainment(Indirect)Score</td> 
               <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.Indirect_PO}}</td>
+                  <td>{{p.Indirect_PO | number : '1.2-2' }}</td>
               </ng-container>
             </tr>
 
@@ -573,7 +574,7 @@
             <tr> 
               <td> PO Attainment(0.8xL1 + 0.2xL2)</td> 
               <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.L1*0.8 + p.L2*0.2 }}</td>
+                  <td>{{p.L1*0.8 + p.L2*0.2 | number : '1.2-2'  }}</td>
               </ng-container>
             </tr>
 

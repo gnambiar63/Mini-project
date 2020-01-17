@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CO } from 'src/app/shared/CO.model';
 import { AccountService } from 'src/app/shared/account.service';
 import { PO } from 'src/app/shared/PO.model';
+import { StorageService } from 'src/app/shared/storage.service';
 
 @Component({
   selector: 'app-input',
@@ -27,29 +28,33 @@ export class InputComponent implements OnInit {
   marks_dist: FormGroup;
 
   
-  constructor(private fb:FormBuilder,private account_service:AccountService) {
+  constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) {
     this.demoform = this.fb.group({demoArray:this.fb.array([])})
    }
 
   ngOnInit() {
-    for(let i=0;i<15;i++)
+    if(!this.storage.getPOValue())
     {
-      let val : PO = {
-        Description : "",
-        Verbs : "",
-        CO_list : [],
-        Justification : "",
-        Total_Sessions:0,
-        Level:0,
-        Direct_PO:0,
-        Indirect_PO:0,
-        L1:0,
-        L2:0
-      };
-      this.po.push(val);
+      for(let i=0;i<15;i++)
+        {
+          let val : PO = {
+          Description : "",
+          Verbs : "",
+          CO_list : [],
+          Justification : "",
+          Total_Sessions:0,
+          Level:0,
+          Direct_PO:0,
+          Indirect_PO:0,
+          L1:0,
+          L2:0
+        };
+        this.po.push(val);
+      }
+      this.account_service.po=this.po;
+    
     }
-    this.account_service.po=this.po;
-
+      
     
     this.co = [];
     this.course_details=this.fb.group({
@@ -67,6 +72,7 @@ export class InputComponent implements OnInit {
   coursesubmit(){
     console.log("Ahead");
     console.log(this.course_details.value);
+
     this.co=this.account_service.co;
     this.po=this.account_service.po;
 
@@ -115,6 +121,9 @@ export class InputComponent implements OnInit {
     }
     
     this.account_service.co=this.co;
+    console.log(this.account_service.co)
+    this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
   }
 
 }

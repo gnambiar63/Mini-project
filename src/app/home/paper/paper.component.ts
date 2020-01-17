@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/shared/account.service';
 import { FormGroup } from '@angular/forms';
 import { CO } from 'src/app/shared/CO.model';
 import { PO } from 'src/app/shared/PO.model';
+import { StorageService } from 'src/app/shared/storage.service';
 
 @Component({
   selector: 'app-paper',
@@ -41,7 +42,7 @@ export class PaperComponent implements OnInit {
   PSO:Array<number>=[1,2,3];
   p:Array<number> = [];
   
-  constructor(private account_service:AccountService) {
+  constructor(private account_service:AccountService,private storage:StorageService) {
     this.account_service.currentMessage
       .subscribe(data => {
         this.co = data;
@@ -58,6 +59,10 @@ export class PaperComponent implements OnInit {
   ngOnInit() {
     // this.course_details=this.account_service.course_details;
     this.po = this.account_service.po;
+    console.log("Enter")
+    console.log(this.po)
+    console.log("Exit")
+    this.co = this.account_service.co;
     
     this.account_service.demo.subscribe(
       (res)=>{
@@ -91,6 +96,8 @@ export class PaperComponent implements OnInit {
       }
       // console.log(this.PO_total)
       // console.log(index+":"+x)
+      // this.storage.setCOValue(this.account_service.co)
+      this.storage.setPOValue(this.account_service.po)
       return true;
     }
     else
@@ -112,6 +119,8 @@ export class PaperComponent implements OnInit {
         this.confirm_total[x+12]+=1;
         console.log("worked")
       }
+      // this.storage.setCOValue(this.account_service.co)
+      this.storage.setPOValue(this.account_service.po)
       return true;
     }
     else
@@ -122,7 +131,7 @@ export class PaperComponent implements OnInit {
     }
   }
 
-  add:Array<any>=[0,0,0,0,0,0,0,0,0,0,0,0];
+  // add:Array<any>=[0,0,0,0,0,0,0,0,0,0,0,0];
 
   // addPO(){
   //   for(let i=0;i<12;i++)

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
 import { MatStepper } from '@angular/material';
+import { StorageService } from 'src/app/shared/storage.service';
 
 @Component({
   selector: 'app-course-exit',
@@ -11,11 +12,13 @@ import { MatStepper } from '@angular/material';
 })
 export class CourseExitComponent implements OnInit {
 
+  @ViewChild('stepper',{static: false}) stepper:MatStepper;
+
   course_exit:FormGroup;
   test:FormGroup;
   co:Array<CO>;
 
-  constructor(private fb:FormBuilder,private account_service:AccountService) { }
+  constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) { }
 
 
   ngOnInit() {
@@ -29,9 +32,20 @@ export class CourseExitComponent implements OnInit {
     })
 
     this.co=this.account_service.co;
-    this.account_service.currentMessage.subscribe(message => this.co = message)
+    // this.account_service.currentMessage.subscribe(message => this.co = message)
 
     console.log(this.co);
+  }
+  ngAfterViewInit()
+  {
+    if(this.account_service.co.length!=0)
+    {
+      this.course_exit.setValue({
+        No3:this.co[0].course_exit[2],
+        No2:this.co[0].course_exit[1],
+        No1:this.co[0].course_exit[0]
+      });
+    }
   }
 
   CO_submit(num){
@@ -41,6 +55,9 @@ export class CourseExitComponent implements OnInit {
     this.account_service.co[num].course_exit[0]=this.course_exit.controls['No1'].value;
     // this.account_service.change();
     this.account_service.changeMessage(this.co)
+
+    this.storage.setCOValue(this.account_service.co)
+    // this.storage.setPOValue(this.account_service.po)
     // this.account_service.change(this.CO_details).subscribe(
     //   (err)=>{
     //     console.log(err);
@@ -49,9 +66,21 @@ export class CourseExitComponent implements OnInit {
 
     // this.account_service.co=this.co;
     console.log(this.account_service.co)
+
+    
+    if(this.account_service.co.length!=0 && num< this.stepper._steps.length-1 && this.course_exit.touched == false  && this.course_exit.dirty == false)
+    {
+      this.course_exit.setValue({
+        No3:this.co[num+1].course_exit[2],
+        No2:this.co[num+1].course_exit[1],
+        No1:this.co[num+1].course_exit[1]
+      });
+    }
   }
   Update_Indirect_PO(event : Event)
   {
     this.account_service.Indirect_PO();
+    // this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
   }
 }

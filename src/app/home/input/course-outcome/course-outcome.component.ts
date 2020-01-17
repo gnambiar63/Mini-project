@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
 import { MatStepper } from '@angular/material';
+import { StorageService } from 'src/app/shared/storage.service';
 
 @Component({
   selector: 'app-course-outcome',
@@ -27,11 +28,23 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     //   else{
     //     this.button.nativeElement.enabled = true;
     //   }
+    if(this.account_service.co.length!=0)
+    {
+      this.CO_details.setValue({
+        Course_Outcome:this.co[0].Course_Outcome,
+        Cognitive_Level:this.co[0].Cognitive_Level,
+        No_of_hours:this.co[0].No_of_hours
+      });
+    }
   }
 
   access(event : Event,i)
   {
     console.log(i);
+    console.log(this.CO_details.controls['Course_Outcome'].value)
+
+    
+
     if(i >= this.stepper._steps.length-1)
     {
       this.button.nativeElement.disabled = false;
@@ -46,10 +59,11 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
   test:FormGroup;
   co:Array<CO>;
 
-  constructor(private fb:FormBuilder,private account_service:AccountService) { }
+  constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) { }
 
 
   ngOnInit() {
+
 
     // if(this.stepper)
     // {
@@ -68,19 +82,38 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     No_of_hours:['',[Validators.required,]],
     })
 
+    
+
     this.co=this.account_service.co;
-    this.account_service.currentMessage.subscribe(message => this.co = message)
+    console.log(this.co)
+    // this.account_service.currentMessage.subscribe(message => this.co = message)
 
     console.log(this.co);
   }
 
   CO_submit(num){
     
+    console.log("1")
+
+
     this.account_service.co[num].Course_Outcome=this.CO_details.controls['Course_Outcome'].value;
     this.account_service.co[num].Cognitive_Level=this.CO_details.controls['Cognitive_Level'].value;
     this.account_service.co[num].No_of_hours=this.CO_details.controls['No_of_hours'].value;
     // this.account_service.change();
     this.account_service.changeMessage(this.co)
+    this.storage.setCOValue(this.account_service.co)
+    console.log(this.storage.getCOValue())
+    console.log(this.storage.getPOValue())
+
+    if(this.account_service.co.length!=0 && num< this.stepper._steps.length-1 && this.CO_details.touched == false  && this.CO_details.dirty == false)
+    {
+      this.CO_details.setValue({
+        Course_Outcome:this.co[num+1].Course_Outcome,
+        Cognitive_Level:this.co[num+1].Cognitive_Level,
+        No_of_hours:this.co[num+1].No_of_hours
+      });
+    }
+    // this.storage.setPOValue(this.account_service.po)
     // this.account_service.change(this.CO_details).subscribe(
     //   (err)=>{
     //     console.log(err);

@@ -1,5 +1,5 @@
 <p style="text-align: center;"><strong>CO-PO Mapping</strong></p>
-                <mat-horizontal-stepper linear class="step">
+                <mat-horizontal-stepper linear class="step" #stepper>
                 <div class="co_details"  *ngFor="let i of co;index as num">
                     <mat-step label="CO{{num+1}}">
                         <!-- <cdk-virtual-scroll-viewport id = "alert_demo" itemSize='4'> -->

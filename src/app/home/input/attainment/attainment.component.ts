@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
+import { StorageService } from 'src/app/shared/storage.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-attainment',
@@ -10,15 +12,17 @@ import { CO } from 'src/app/shared/CO.model';
 })
 export class AttainmentComponent implements OnInit {
 
+  @ViewChild('stepper',{static: false}) stepper:MatStepper;
 
   marks_dist:FormGroup;
   co:Array<CO>;
   exam :Array<string>=["ISE1","ISE2","MSE","ESE"];
   exam_values:Array<string>=[];
 
-  constructor(private fb:FormBuilder,private account_service:AccountService) {
+  constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) {
     this.co=this.account_service.co;
    }
+
 
   ngOnInit() {
     
@@ -31,6 +35,20 @@ export class AttainmentComponent implements OnInit {
 
     this.co=this.account_service.co;
   }
+
+  ngAfterViewInit()
+  {
+    if(this.account_service.co.length!=0)
+    {
+      this.marks_dist.setValue({
+        ISE1:this.co[0].ISE1A,
+        ISE2:this.co[0].ISE2A,
+        MSE:this.co[0].MSEA,
+        ESE:this.co[0].ESEA
+      });
+    }
+  }
+  
 
   marks(num)
   {
@@ -78,11 +96,27 @@ export class AttainmentComponent implements OnInit {
       }
       this.account_service.co[num].obt=(0.1*x + 0.3*y + 0.6*z);
       this.account_service.co[num].dv=100*((0.1*x + 0.3*y + 0.6*z)/(this.account_service.co[num].p))
+
+      this.storage.setCOValue(this.account_service.co)
+
+      if(this.account_service.co.length!=0 && num< this.stepper._steps.length-1 && this.marks_dist.touched == false  && this.marks_dist.dirty == false)
+      {
+        this.marks_dist.setValue({
+          ISE1:this.co[num+1].ISE1A,
+          ISE2:this.co[num+1].ISE2A,
+          MSE:this.co[num+1].MSEA,
+          ESE:this.co[num+1].ESEA
+        });
+      }
+      // this.storage.setPOValue(this.account_service.po)
   }
 
   Update_Direct_PO(event : Event)
   {
     this.account_service.Direct_PO();
+    // this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
+    console.log(this.account_service.po)
   }
 
 }

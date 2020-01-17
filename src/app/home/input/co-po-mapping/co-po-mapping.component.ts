@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/account.service';
 import { CO } from 'src/app/shared/CO.model';
 import { PO } from 'src/app/shared/PO.model';
+import { StorageService } from 'src/app/shared/storage.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-co-po-mapping',
@@ -10,12 +12,13 @@ import { PO } from 'src/app/shared/PO.model';
   styleUrls: ['./co-po-mapping.component.css']
 })
 export class COPOMappingComponent implements OnInit {
+  @ViewChild('stepper',{static: false}) stepper:MatStepper;
 
   PO_details:FormGroup;
   co:Array<CO>;
   po:Array<PO>;
   show:boolean=false;
-  constructor(private fb:FormBuilder,private account_service:AccountService) { }
+  constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) { }
 
 
 
@@ -26,6 +29,17 @@ export class COPOMappingComponent implements OnInit {
     this.co=this.account_service.co;
     this.po=this.account_service.po;
   }
+
+  // ngAfterViewInit()
+  // {
+  //   if(this.account_service.co.length!=0)
+  //   {
+  //     this.PO_details.setValue({
+  //       ESE:this.co[this.stepper.selectedIndex].ESEA
+  //     });
+  //   }
+  // }
+
   PO_submit(num)
   {
     // this.co[this.PO_index].PO_map.push(this.PO_details.controls['po_pso'].value);
@@ -73,6 +87,9 @@ export class COPOMappingComponent implements OnInit {
     console.log(this.co[num].PO_map);
     this.show = true;
     this.account_service.changeMessage(this.co)
+
+    this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
   }
   
   del(event,index,num){
@@ -99,10 +116,15 @@ export class COPOMappingComponent implements OnInit {
     // console.log(this.po[index].CO_list)
     // console.log(index)
     this.account_service.changeMessage(this.co)
+
+    this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
   }
 
   Addup(event : Event)
   {
     this.account_service.PO_Total();
+    // this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../shared/account.service';
+import { StorageService } from '../shared/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   public mobile:boolean=true;
-  constructor() { }
+  constructor(private account_service:AccountService,private storage:StorageService) { }
 
   ngOnInit() {
+
+    if(this.storage.getCOValue())
+    {
+      this.account_service.co = this.storage.getCOValue()
+    }
+    if(this.storage.getPOValue())
+    {
+      this.account_service.po = this.storage.getPOValue()
+    }
+    console.log(this.account_service.co)
+    console.log(this.account_service.po)
+
   }
 
 }
