@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder,FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../shared/account.service';
 import { Router } from '@angular/router';
@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginform: FormGroup;
   submitted = false;
-  public value : number = 2;
+  public value : string = '2';
   public Email : string = "";
+
+  @Output() loginEvent = new EventEmitter();
 
 
   constructor(private account_service: AccountService,private fb: FormBuilder,private router: Router) { }
@@ -31,20 +33,20 @@ export class LoginComponent implements OnInit {
     this.account_service.login(this.loginform.value).subscribe(
       (res)=> {
         console.log(res);
-        this.value = 1;
-        this.Email = res.Email;
-        this.router
+        this.value = '1';
+        this.account_service.changeEmail(res.Email)
         this.router.navigateByUrl('/home');
+        this.loginEvent.emit(res.Email);
       },
       (err)=> 
       {
         console.log(err);
         if(err.status == '401')
         {
-          this.value = 0;
+          this.value = '0';
         }
         else{
-          this.value = -1;
+          this.value = '-1';
         }
       }
     );

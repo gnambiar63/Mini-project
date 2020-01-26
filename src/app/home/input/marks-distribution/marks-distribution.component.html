@@ -10,12 +10,12 @@
                             </div>
                             
                             <div class="center">    
-                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
+                                    <button id="mardist-{{num}}" class="btn btn-sm btn-info" matStepperNext type="submit"(click)="access($event,num)">Move To Next</button>
                             </div>
                         </form>
                     </mat-step>
                     </div>
             </mat-horizontal-stepper>
             <div class="center">    
-                    <button class="btn btn-sm btn-primary" matStepperNext [disabled]="true">Proceed</button>
+                    <button class="btn btn-sm btn-primary" [disabled] = "true" matStepperNext #btn>Proceed</button>
                 </div>

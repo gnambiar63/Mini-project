@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CO } from 'src/app/shared/CO.model';
-import { PO } from 'src/app/shared/PO.model';
+import { CO } from './CO.model';
+import { PO } from './PO.model';
 import { FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -12,10 +12,12 @@ export class AccountService {
   @Output() fire: EventEmitter<any> = new EventEmitter();
 
   private data : string = '';
+  public email : string = '';
 
 
   co:Array<CO>=[];
   po:Array<PO>=[];
+  main_course_details=["","","","","","",""];
   course_details : FormGroup;
   public demo:Observable<any>;
   public course_exit:Observable<any>;
@@ -28,29 +30,36 @@ export class AccountService {
 
   constructor(private http: HttpClient) {
     this.messageSource.next(this.co);
+    this.messageSource.next(this.email);
   }
 
   register(signupdata)
   {
-    return this.http.post<any>("http://localhost:3000/register",signupdata);
+    return this.http.post<any>("http://"+ window.location.hostname +":3000/register",signupdata);
   }
   login(logindata)
   {
-    return this.http.post<any>("http://localhost:3000/login",logindata);
+    console.log(window.location.hostname)
+    return this.http.post<any>("http://"+ window.location.hostname +":3000/login",logindata);
   }
-  setValue(val) {
-    this.co = val;
-    return null;
-  }
+  // setValue(val) {
+  //   this.co = val;
+  //   return null;
+  // }
 
-  getValue() {
-      return this.co ;
-  }
+  // getValue() {
+  //     return this.co ;
+  // }
 
 
   change() {
     console.log('change started'); 
      this.fire.emit(this.co);
+   }
+
+   updateMail() {
+    console.log('change started'); 
+     this.fire.emit(this.email);
    }
 
    Direct_PO()
@@ -189,6 +198,14 @@ export class AccountService {
 
    changeMessage(message: Array<CO>) {
     this.messageSource.next(message)
+  }
+
+  private EmailSource = new BehaviorSubject(null);
+  currentEmail = this.EmailSource.asObservable();
+
+  changeEmail(Email : string)
+  {
+    this.EmailSource.next(Email);
   }
 
 

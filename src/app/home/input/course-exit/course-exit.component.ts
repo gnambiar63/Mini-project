@@ -13,6 +13,7 @@ import { StorageService } from 'src/app/shared/storage.service';
 export class CourseExitComponent implements OnInit {
 
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
+  @ViewChild('btn',{static: false}) final_button;
 
   course_exit:FormGroup;
   test:FormGroup;
@@ -38,13 +39,26 @@ export class CourseExitComponent implements OnInit {
   }
   ngAfterViewInit()
   {
-    if(this.account_service.co.length!=0)
+    setTimeout(() => {    //set timeout is used to avoid expressionchange error.Let the form load empty first and then fill it.
+      if(this.account_service.co.length!=0)
+      {
+        this.course_exit.setValue({
+          No3:this.co[0].course_exit[2],
+          No2:this.co[0].course_exit[1],
+          No1:this.co[0].course_exit[0]
+        });
+      }
+    });
+  }
+
+  access(event : Event,i)
+  {
+    let x = document.getElementById("coex-"+String(this.stepper._steps.length-1));
+    x.innerHTML="Save Changes";
+    if(i >= this.stepper._steps.length-1)
     {
-      this.course_exit.setValue({
-        No3:this.co[0].course_exit[2],
-        No2:this.co[0].course_exit[1],
-        No1:this.co[0].course_exit[0]
-      });
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("coex-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
     }
   }
 

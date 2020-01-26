@@ -13,6 +13,7 @@ import { MatStepper } from '@angular/material';
 export class MarksDistributionComponent implements OnInit {
 
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
+  @ViewChild('btn',{static: false}) final_button;
 
 
   marks_dist:FormGroup;
@@ -38,14 +39,27 @@ export class MarksDistributionComponent implements OnInit {
 
   ngAfterViewInit()
   {
-    if(this.account_service.co.length!=0)
+    setTimeout(() => {
+      if(this.account_service.co.length!=0)
+      {
+        this.marks_dist.setValue({
+          ISE1:this.co[0].ISE1,
+          ISE2:this.co[0].ISE2,
+          MSE:this.co[0].MSE,
+          ESE:this.co[0].ESE
+        });
+      }
+    });
+  }
+
+  access(event : Event,i)
+  {
+    let x = document.getElementById("mardist-"+String(this.stepper._steps.length-1));
+    x.innerHTML="Save Changes";
+    if(i >= this.stepper._steps.length-1)
     {
-      this.marks_dist.setValue({
-        ISE1:this.co[0].ISE1,
-        ISE2:this.co[0].ISE2,
-        MSE:this.co[0].MSE,
-        ESE:this.co[0].ESE
-      });
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("mardist-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
     }
   }
 

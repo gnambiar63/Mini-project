@@ -1,6 +1,5 @@
 <!-- <cdk-virtual-scroll-viewport id='demo' itemSize='4'> -->
 
-<button type="button" style="margin:5px;" class="btn btn-info" (click)="paper()">Print</button>
 <div class="scroll">
   <div id="paper">
     <div style='text-align: center'>
@@ -11,36 +10,7 @@
       <h5>Year 2019-20</h5>
       <h5>Phase-1 Planning</h5>
     </div>
-    <!-- <div id='info'>
-        <div style='margin-top: 2%;text-align: center'>
-          <h5>End Semester Examination</h5>
-          <p>{{ semMonth }}</p>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <ul id='headerLeft'>
-              <li>Max. Marks: {{ marks }}</li>
-              <li>Class: {{ class }}</li>
-              <li>Course code: {{ courseCode }}</li>
-              <li>Course: {{ course }}</li>
-            </ul>
-          </div>
-          <div class="col-6">
-            <ul id='headerLeft'>
-              <li>Duration: {{ duration }}</li>
-              <li>Semester: {{ sem }}</li>
-              <li>Branch: {{ branch }}</li>
-            </ul>
-          </div>
-        </div>
-        <hr>
-        <div id='instructions'>
-          <p>Instructions: </p>
-          <ul>
-            <li *ngFor="let i of instructions;index as num">{{ num+1 }}. {{ i }}</li>
-          </ul>
-        </div> -->
-    <!-- </div> -->
+
     <br><br>
 
     <div *ngIf="course_details">
@@ -51,32 +21,32 @@
 
             <tr>
               <th>Course Name</th>
-              <td>{{course_details.name}}</td>
+              <td>{{course_details_display.name}}</td>
             </tr>
 
             <tr>
               <th>Course Code</th>
-              <td>{{course_details.code}}</td>
+              <td>{{course_details_display.code}}</td>
             </tr>
 
             <tr>
               <th>Sessions of Course</th>
-              <td>{{course_details.session}}</td>
+              <td>{{course_details_display.session}}</td>
             </tr>
 
             <tr>
               <th>Semester</th>
-              <td>{{course_details.semester}}</td>
+              <td>{{course_details_display.semester}}</td>
             </tr>
 
             <tr>
               <th>Credits</th>
-              <td>{{course_details.credits}}</td>
+              <td>{{course_details_display.credits}}</td>
             </tr>
 
             <tr>
               <th>L:T:P</th>
-              <td>{{course_details.ltp}}</td>
+              <td>{{course_details_display.ltp}}</td>
             </tr>
 
           </tbody>
@@ -139,7 +109,7 @@
               <th></th>
               <th>Total Hours of Instructions</th>
               <th></th>
-              <th>{{course_details.session}}</th>
+              <th>{{course_details_display.session}}</th>
             </tr>
 
           </tbody>
@@ -177,7 +147,7 @@
               <th></th>
               <th>Total Hours of Instructions</th>
               <th></th>
-              <th>{{course_details.session}}</th>
+              <th>{{course_details_display.session}}</th>
             </tr>
 
           </tbody>

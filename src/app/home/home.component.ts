@@ -22,8 +22,13 @@ export class HomeComponent implements OnInit {
     {
       this.account_service.po = this.storage.getPOValue()
     }
+    if(this.storage.getCourseDetailsValue())
+    {
+      this.account_service.main_course_details = this.storage.getCourseDetailsValue()
+    }
     console.log(this.account_service.co)
     console.log(this.account_service.po)
+    console.log(this.account_service.main_course_details)
 
   }
 

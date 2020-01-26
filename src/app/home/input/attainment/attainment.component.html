@@ -6,16 +6,16 @@
                         <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks(num)">
                             <div class="form-group" *ngFor="let p of exam;index as index">
                                     {{p}}:
-                                    <input type="text" class="form-control" formControlName="{{p}}">
+                                    <input type="text" class="form-control" formControlName="{{p}}" name = "{{p}}">
                             </div>
                             
                             <div class="center">    
-                                    <button class="btn btn-sm btn-info" matStepperNext type="submit">Move To Next</button>
+                                    <button id="at-{{num}}" class="btn btn-sm btn-info" matStepperNext (click)="access($event,num)" type="submit">Move To Next</button>
                             </div>
                         </form>
                     </mat-step>
                     </div>
             </mat-horizontal-stepper>
             <div class="center">    
-                    <button class="btn btn-sm btn-primary" (click)="Update_Direct_PO($event)" matStepperNext [disabled]="true">Proceed</button>
+                    <button class="btn btn-sm btn-primary" (click)="Update_Direct_PO($event)" matStepperNext [disabled]="true" #btn>Proceed</button>
                 </div>

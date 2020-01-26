@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { CO } from 'src/app/shared/CO.model';
-import { AccountService } from 'src/app/shared/account.service';
-import { PO } from 'src/app/shared/PO.model';
-import { StorageService } from 'src/app/shared/storage.service';
+import { CO } from '../../shared/CO.model';
+import { AccountService } from '../../shared/account.service';
+import { PO } from '../../shared/PO.model';
+import { StorageService } from '../../shared/storage.service';
 
 @Component({
   selector: 'app-input',
@@ -11,6 +11,9 @@ import { StorageService } from 'src/app/shared/storage.service';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
+
+  @Output() myEvent = new EventEmitter();
+
 
   course_details : FormGroup;
   CO_details : FormGroup;
@@ -69,6 +72,29 @@ export class InputComponent implements OnInit {
   
       this.account_service.demo=this.course_details.valueChanges;
   }
+  ngAfterViewInit()
+  {
+    setTimeout(() => {
+      if(this.account_service.main_course_details[0]!="")
+      {
+        this.course_details.setValue({
+          name:this.account_service.main_course_details[0],
+          code:this.account_service.main_course_details[1],
+          session:this.account_service.main_course_details[2],
+          semester:this.account_service.main_course_details[3],
+          credits:this.account_service.main_course_details[4],
+          ltp:this.account_service.main_course_details[5],
+          co:this.account_service.main_course_details[6]
+        });
+      }
+    });
+  }
+
+  print(event :Event)
+  {
+    this.myEvent.emit(null)
+  }
+
   coursesubmit(){
     console.log("Ahead");
     console.log(this.course_details.value);
@@ -77,6 +103,16 @@ export class InputComponent implements OnInit {
     this.po=this.account_service.po;
 
     this.account_service.course_details=this.course_details;
+
+    this.account_service.main_course_details[0]=this.course_details.controls["name"].value;
+    this.account_service.main_course_details[1]=this.course_details.controls["code"].value;
+    this.account_service.main_course_details[2]=this.course_details.controls["session"].value;
+    this.account_service.main_course_details[3]=this.course_details.controls["semester"].value;
+    this.account_service.main_course_details[4]=this.course_details.controls["credits"].value;
+    this.account_service.main_course_details[5]=this.course_details.controls["ltp"].value;
+    this.account_service.main_course_details[6]=this.course_details.controls["co"].value;
+
+    this.storage.setCourseDetailsValue(this.account_service.main_course_details);
 
     var addvar = this.course_details.controls['co'].value - this.co.length;
 

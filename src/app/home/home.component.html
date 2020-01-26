@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-sm-6 col-lg-6 colclass">
-        <app-input></app-input>
+        <app-input (myEvent)="paperprint.paper()"></app-input>
     </div>
     <div class="col-sm-6 col-lg-6 colclass">
-        <app-paper></app-paper>
+        <app-paper #paperprint></app-paper>
     </div>
 </div>

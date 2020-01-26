@@ -13,8 +13,7 @@ import { StorageService } from 'src/app/shared/storage.service';
 export class CourseOutcomeComponent implements OnInit,AfterViewInit {
 
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
-  @ViewChild('btn',{static: false}) button;
-  @ViewChild('ref',{static: false}) reference:ElementRef;
+  @ViewChild('btn',{static: false}) final_button;
 
 
   //small bug where deleting stepper contents while stepper index greater than or equal to the one 
@@ -28,14 +27,17 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     //   else{
     //     this.button.nativeElement.enabled = true;
     //   }
-    if(this.account_service.co.length!=0)
-    {
-      this.CO_details.setValue({
-        Course_Outcome:this.co[0].Course_Outcome,
-        Cognitive_Level:this.co[0].Cognitive_Level,
-        No_of_hours:this.co[0].No_of_hours
-      });
-    }
+    setTimeout(() => {
+      if(this.account_service.co.length!=0)
+      {
+        this.CO_details.setValue({
+          Course_Outcome:this.co[0].Course_Outcome,
+          Cognitive_Level:this.co[0].Cognitive_Level,
+          No_of_hours:this.co[0].No_of_hours
+        });
+      }
+    });
+    
   }
 
   access(event : Event,i)
@@ -43,15 +45,12 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     console.log(i);
     console.log(this.CO_details.controls['Course_Outcome'].value)
 
-    
-
+    let x = document.getElementById("initial_btn-"+String(this.stepper._steps.length-1));
+    x.innerHTML="Save Changes";
     if(i >= this.stepper._steps.length-1)
     {
-      this.button.nativeElement.disabled = false;
-      this.reference.nativeElement.innerText = 'Save Changes';  //Does not work for some reason
-
-      // this.button2.nativeElement.disabled = true;
-      // this.secbutton.nativeElement.disabled = true;
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("initial_btn-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
     }
   }
   

@@ -36,14 +36,14 @@ exports.register = (req,res) =>
                 if (!err) {
                     console.log('success');
                     res.status(200).send({ message: 'Valid' });
-                    app.get('/register', (req, res) => res.send("Success"));
+                    // router.get('/register', (req, res) => res.send("Success"));
 
                 }
                 else {
                     console.log('failure');
                     res.status(401).send({ message: 'Invalid', error: err });
                     console.log(err);
-                    app.get('/register', (req, res) => res.send("Try again"));
+                    // router.get('/register', (req, res) => res.send("Try again"));
                 }
             });
         }

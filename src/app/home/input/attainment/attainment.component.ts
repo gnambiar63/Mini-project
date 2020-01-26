@@ -13,6 +13,7 @@ import { MatStepper } from '@angular/material';
 export class AttainmentComponent implements OnInit {
 
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
+  @ViewChild('btn',{static: false}) final_button;
 
   marks_dist:FormGroup;
   co:Array<CO>;
@@ -38,14 +39,27 @@ export class AttainmentComponent implements OnInit {
 
   ngAfterViewInit()
   {
-    if(this.account_service.co.length!=0)
+    setTimeout(() => { 
+      if(this.account_service.co.length!=0)
+      {
+        this.marks_dist.setValue({
+          ISE1:this.co[0].ISE1A,
+          ISE2:this.co[0].ISE2A,
+          MSE:this.co[0].MSEA,
+          ESE:this.co[0].ESEA
+        });
+      }
+    });
+  }
+
+  access(event : Event,i)
+  {
+    let x = document.getElementById("at-"+String(this.stepper._steps.length-1));
+    x.innerHTML="Save Changes";
+    if(i >= this.stepper._steps.length-1)
     {
-      this.marks_dist.setValue({
-        ISE1:this.co[0].ISE1A,
-        ISE2:this.co[0].ISE2A,
-        MSE:this.co[0].MSEA,
-        ESE:this.co[0].ESEA
-      });
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("at-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
     }
   }
   

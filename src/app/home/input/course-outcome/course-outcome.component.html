@@ -6,18 +6,18 @@
                         <form class="COdetails" [formGroup]="CO_details" (ngSubmit)="CO_submit(num)">
                             <div class="form-group">
                                 <label for="course_outcome">Course Outcome</label>
-                                <input id="course_outcome" formControlName="Course_Outcome" type="text" class="form-control">
+                                <input id="course_outcome-{{num}}" formControlName="Course_Outcome" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="cognitive_level">Cognitive Level</label>
-                                <input id="cognitive_level" formControlName="Cognitive_Level" type="text" class="form-control">
+                                <input id="cognitive_level-{{num}}" formControlName="Cognitive_Level" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                     <label for="session">No of Sessions</label>
-                                    <input id="session" formControlName="No_of_hours" type="text" class="form-control">
+                                    <input id="session-{{num}}" formControlName="No_of_hours" type="text" class="form-control">
                             </div>
                             <div class="center">    
-                                    <button class="btn btn-sm btn-info" type="submit" (click)="access($event,num)" [disabled]="false" matStepperNext #ref>Move To Next</button>
+                                    <button id="initial_btn-{{num}}" class="btn btn-sm btn-info" type="submit" (click)="access($event,num)" [disabled]="false" matStepperNext #ref>Move To Next</button>
                             </div>
                             
                         </form>

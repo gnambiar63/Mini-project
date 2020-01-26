@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/shared/account.service';
-import { FormGroup } from '@angular/forms';
-import { CO } from 'src/app/shared/CO.model';
-import { PO } from 'src/app/shared/PO.model';
-import { StorageService } from 'src/app/shared/storage.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AccountService } from '../../shared/account.service';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CO } from '../../shared/CO.model';
+import { PO } from '../../shared/PO.model';
+import { StorageService } from '../../shared/storage.service';
 
 @Component({
   selector: 'app-paper',
@@ -11,29 +11,25 @@ import { StorageService } from 'src/app/shared/storage.service';
   styleUrls: ['./paper.component.css']
 })
 export class PaperComponent implements OnInit {
-  // current = null;
-  // semMonth = 'Nov/Dec. 2018';
-  // marks = 80;
-  // class = 'T.E';
-  // courseCode = 'IT52';
-  // course = 'Computer Networks';
-  // duration = '180 Minutes';
-  // sem = 'V';
-  // branch = 'IT';
 
+  
+  
   PO_total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   confirm_total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 
   show_details:boolean=false;
-  course_details : FormGroup;
+  public course_details : FormGroup =this.fb.group({
+    name:['',[Validators.required]],
+    code:['',[Validators.required,]],
+    session:['',[Validators.required,]],
+    semester:['',[Validators.required,]],
+    credits:['',[Validators.required,]],
+    ltp:['',[Validators.required,]],
+    co:['',[Validators.required,]]
+  });
+  printContents;
   
-  
-  // instructions = [
-  //   'All Questions are Compulsory',
-  //   'Draw neat diagrams',
-  //   'Assume suitable data if necessary'
-  // ];
 
   co:Array<CO>;
   po:Array<PO>;
@@ -41,8 +37,18 @@ export class PaperComponent implements OnInit {
   PO:Array<number>=[1,2,3,4,5,6,7,8,9,10,11,12];
   PSO:Array<number>=[1,2,3];
   p:Array<number> = [];
+
+  public course_details_display = {
+    name  : "",
+    code  : "",
+    session  : "",
+    semester  : "",
+    credits  : "",
+    ltp  : "",
+    co  : ""
+  }
   
-  constructor(private account_service:AccountService,private storage:StorageService) {
+  constructor(private account_service:AccountService,private storage:StorageService,private fb:FormBuilder) {
     this.account_service.currentMessage
       .subscribe(data => {
         this.co = data;
@@ -50,6 +56,7 @@ export class PaperComponent implements OnInit {
       });
 
       this.po = this.account_service.po;
+      console.log("Called it")
 
   }
   
@@ -67,6 +74,13 @@ export class PaperComponent implements OnInit {
     this.account_service.demo.subscribe(
       (res)=>{
         this.course_details=res;
+        this.course_details_display.name = res.name
+        this.course_details_display.code = res.code
+        this.course_details_display.session = res.session
+        this.course_details_display.semester = res.semester
+        this.course_details_display.credits = res.credits
+        this.course_details_display.ltp = res.ltp
+        this.course_details_display.co = res.co
         console.log(res);
       }
       
@@ -187,8 +201,8 @@ export class PaperComponent implements OnInit {
   }
   
   paper(): void {
-    let printContents, popupWin;
-    printContents = document.getElementById('paper').innerHTML;
+    let popupWin;
+    this.printContents = document.getElementById('paper').innerHTML;
     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
     popupWin.document.write(`
@@ -347,7 +361,7 @@ export class PaperComponent implements OnInit {
               }
           </style>
         </head>
-    <body onload="window.print();window.close()">${printContents}</body>
+    <body onload="window.print();window.close()">${this.printContents}</body>
       </html>`
     );
     popupWin.document.close();

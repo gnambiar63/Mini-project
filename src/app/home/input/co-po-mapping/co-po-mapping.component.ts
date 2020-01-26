@@ -13,6 +13,7 @@ import { MatStepper } from '@angular/material';
 })
 export class COPOMappingComponent implements OnInit {
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
+  @ViewChild('btn',{static: false}) final_button;
 
   PO_details:FormGroup;
   co:Array<CO>;
@@ -30,15 +31,16 @@ export class COPOMappingComponent implements OnInit {
     this.po=this.account_service.po;
   }
 
-  // ngAfterViewInit()
-  // {
-  //   if(this.account_service.co.length!=0)
-  //   {
-  //     this.PO_details.setValue({
-  //       ESE:this.co[this.stepper.selectedIndex].ESEA
-  //     });
-  //   }
-  // }
+  access(event : Event,i)
+  {
+    let x = document.getElementById("copo-"+String(this.stepper._steps.length-1));
+    x.innerHTML="Save Changes";
+    if(i >= this.stepper._steps.length-1)
+    {
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("copo-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
+    }
+  }
 
   PO_submit(num)
   {

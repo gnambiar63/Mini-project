@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from './shared/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,27 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'obe';
-  private mobile : any;
+  public mobile : any;
   public innerWidth: any;
-  constructor(private router : Router){}
+  public email;
+  constructor(public router : Router,private account_service:AccountService){
+    this.account_service.currentEmail
+      .subscribe(data => {
+        this.email = data;
+        if(data)
+        {
+          localStorage.setItem('Email', data);
+        }
+        console.log(localStorage.getItem('Email'))
+        // console.log(this.co);
+      });
+  }
   ngOnInit(){
+    if(localStorage.getItem('Email'))
+    {
+      this.email = localStorage.getItem('Email');
+    }
+    console.log("This is "+this.email)
     this.onResize(null);
   }
   @HostListener('window:resize', ['$event'])
@@ -29,5 +47,12 @@ export class AppComponent {
       }
       console.log(this.innerWidth);
     }
+  }
+
+  updateEmail($event)
+  {
+    console.log("update email")
+    console.log($event)
+    this.email = $event;
   }
 }
