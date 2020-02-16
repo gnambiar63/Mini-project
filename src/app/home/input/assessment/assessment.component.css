@@ -1,0 +1,32 @@
+.input{
+    height:80vh;
+}
+@media (max-width: 450px) {
+    .input{
+        height:50vh;
+    }
+  }
+
+.step{
+    background-color: #FFF2E9;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: purple; 
+}
+#demo {
+    height: 100%;
+    width: auto;
+    color: black;
+    /* border: 2px solid red; */
+  }
+.center{
+    text-align: center;
+}
+/* .alert {
+    width:40%;    
+ }
+ .alert_demo{
+     height:100px;
+     width:auto;
+ } */

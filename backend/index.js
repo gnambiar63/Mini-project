@@ -10,6 +10,8 @@ let bcrypt = require('bcrypt');
 
 let app=express();
 
+var dbo;
+
 const User=require('./models/user.model');
 
 let link="mongodb+srv://admin:admin@mini-project-sx4vj.mongodb.net/test?retryWrites=true&w=majority";
@@ -26,7 +28,8 @@ app.listen(port,function(){
         }
         else{
             console.log("connection successful");
-            var db = mongoose.connection;
+            dbo = mongoose.connection.db;
+            // console.log(db.db)
         }
     });
 }
@@ -132,6 +135,49 @@ app.post("/login",function(req,res)
         }
         
     });
+});
+
+app.post("/save_drafts",function(req,res)
+{
+    var x = {
+        "Main_Details":req.body.Main_Details,
+        "CO":req.body.CO,
+        "PO":req.body.PO
+    } 
+
+    // console.log(x)
+    // console.log("Hi")
+
+      dbo.collection("Drafts").findOneAndUpdate(
+        { "Subject_Code":req.body.Subject_Code },
+        { $set: { "Subject_Code":req.body.Subject_Code,"Email":req.body.Email,"Data" : x} },
+        { upsert:true, returnNewDocument : true },
+        function(err, ans) {
+            if (err) throw err;
+            console.log("Saved Changes");
+            res.send({message : 'Document Inserted'});
+      }
+     );
+        // res.send({message : 'Document Already exists'});
+    
+});
+
+app.post("/find_drafts",function(req,res)
+{
+        console.log(req.body.Email)  
+        dbo.collection("Drafts").find(
+            { "Email":req.body.Email }).toArray(
+            function(err, ans) {
+                if (err) throw err;
+                if(ans)
+                {
+                    console.log(ans)
+                    res.send(ans)
+                }
+          }
+         );
+        // res.send({message : 'Document Already exists'});
+    
 });
 
 

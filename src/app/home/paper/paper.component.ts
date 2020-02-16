@@ -38,6 +38,10 @@ export class PaperComponent implements OnInit {
   PSO:Array<number>=[1,2,3];
   p:Array<number> = [];
 
+  public final_attainment:Array<number>;
+
+
+
   public course_details_display = {
     name  : "",
     code  : "",
@@ -55,6 +59,12 @@ export class PaperComponent implements OnInit {
         console.log(this.co);
       });
 
+    this.account_service.currentData
+      .subscribe(data => {
+        this.final_attainment = data;
+        console.log(this.final_attainment);
+      });
+
       this.po = this.account_service.po;
       console.log("Called it")
 
@@ -70,6 +80,8 @@ export class PaperComponent implements OnInit {
     console.log(this.po)
     console.log("Exit")
     this.co = this.account_service.co;
+
+    this.final_attainment = [0,0]
     
     this.account_service.demo.subscribe(
       (res)=>{
@@ -85,6 +97,7 @@ export class PaperComponent implements OnInit {
       }
       
     );
+
   
 
   }

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/shared/account.service';
-import { CO } from 'src/app/shared/CO.model';
-import { StorageService } from 'src/app/shared/storage.service';
+import { AccountService } from '../../../shared/account.service';
+import { CO } from '../../../shared/CO.model';
+import { StorageService } from '../../../shared/storage.service';
 import { MatStepper } from '@angular/material';
 
 @Component({
@@ -56,11 +56,7 @@ export class MarksDistributionComponent implements OnInit {
   {
     let x = document.getElementById("mardist-"+String(this.stepper._steps.length-1));
     x.innerHTML="Save Changes";
-    if(i >= this.stepper._steps.length-1)
-    {
-      this.final_button.nativeElement.disabled = false;
-      (document.getElementById("mardist-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
-    }
+
   }
 
   marks(num)
@@ -82,7 +78,28 @@ export class MarksDistributionComponent implements OnInit {
        ESE:this.co[num+1].ESE
      });
    }
+   if(num >= this.stepper._steps.length-1)
+   {
+     this.final_button.nativeElement.disabled = false;
+     (document.getElementById("at-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
+   }
   //  this.storage.setPOValue(this.account_service.po)
+  }
+  Update_New_Direct_CO(event : Event)
+  {
+    this.account_service.New_Direct_CO();
+    // this.storage.setCOValue(this.account_service.co)
+    this.storage.setCOValue(this.account_service.co)
+    this.storage.setPOValue(this.account_service.po)
+    this.account_service.save_draft().subscribe(
+      (res)=>{
+        console.log("File saved")
+      },
+      (err)=>{
+        console.log("Failed!!")
+      }
+    );
+    console.log(this.account_service.co)
   }
 
 }

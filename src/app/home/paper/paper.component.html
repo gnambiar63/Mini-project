@@ -95,14 +95,14 @@
               <th>CO</th>
               <th>Course Outcome</th>
               <th>Cognitive Level</th>
-              <th>Class Sessions(No of Hours)</th>
+              <th>CO Target</th>
             </tr>
 
             <tr *ngFor="let c of co;index as index">
               <td>CO{{index+1}}</td>
               <td>{{c.Course_Outcome}}</td>
               <td>{{c.Cognitive_Level}}</td>
-              <td>{{c.No_of_hours}}</td>
+              <td>{{c.CO_Target}}</td>
             </tr>
 
             <tr>
@@ -214,9 +214,9 @@
             </tr>
 
             <tr>
-              <td>Level</td>
+              <td>Strength</td>
               <td *ngFor="let p of po;index as index">
-                <p>{{p.Level}}</p>
+                <p>{{p.Level  | number : '1.2-2'  }}</p>
               </td>
             </tr>
 
@@ -229,7 +229,7 @@
     </div>
 
     <u>
-      <h6 class="space">Plan:</h6>
+      <h6 class="space">Table 2: Course Outcomes Assessment Tools Mapping</h6>
     </u>
 
     <div *ngIf="co && course_details">
@@ -238,158 +238,133 @@
 
           <tbody>
             <tr>
-              <th>CL</th>
-              <th>ISE-1</th>
-              <th>ISE-2</th>
-              <th>MSE</th>
-              <th>ESE</th>
-            </tr>
-
-            <!-- Input as marks
-            Converts into percentage -->
-
-            <tr *ngFor="let c of co;index as index">
-              <td>CO{{index+1}}</td>
-              <td>{{(c.ISE1)/(0.1)  | number : '1.2-2' }}</td>
-              <td>{{(c.ISE2)/(0.1)  | number : '1.2-2' }}</td>
-              <td>{{(c.MSE)/(0.2)  | number : '1.2-2' }}</td>
-              <td>{{(c.ESE)/(0.6)  | number : '1.2-2' }}</td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-    </div>
-
-    <h5 style="text-align: center;">PHASE II: ATTAINMENT</h5>
-
-    <div *ngIf="co && course_details">
-      <div class="table-sm" id="list">
-        <table class="table">
-
-          <tbody>
-            <tr>
-              <th>CL</th>
-              <th>IE</th>
-              <!-- <th>IE</th> -->
-              <th>MSE</th>
-              <th>ESE</th>
-            </tr>
-
-            <!-- pipe used to round off decimal to 2 places , min digits before decimal.min digits after decimal-max after decimal -->
-            <tr *ngFor="let c of co;index as index">
-              <td>CO{{index+1}}</td>
-              <td *ngIf="c.ISE1*1 + c.ISE2*1 != 0">{{1*c.ISE1A + 1*c.ISE2A}}/{{c.ISE1*1 + c.ISE2*1}} =
-                {{100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.ISE1*1 + c.ISE2*1 === 0"> </td>
-              <!-- <td>{{c.ISE2A}}</td> -->
-              <td *ngIf="c.MSE*1 != 0">{{c.MSEA}}/{{c.MSE*1}} = {{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.MSE*1 === 0"> </td>
-
-              <td *ngIf="c.ESE*1 != 0">{{c.ESEA}}/{{c.ESE*1}} = {{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.ESE*1 === 0"> </td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-    </div>
-
-    <u>
-      <h6 class="space">Computation of CO Direct Attainment in the course Strength of Materials</h6>
-    </u>
-
-    <div *ngIf="co && course_details">
-      <div class="table-sm" id="list">
-        <table class="table">
-
-          <tbody>
-            <tr>
-              <th>CL</th>
-              <th>IE</th>
-              <!-- <th>IE</th> -->
-              <th>MSE</th>
-              <th>ESE</th>
-              <th>(0.10 IE Cl. Avg.) + (0.30*MSE Cl. Avg.)+ (0.60*ESE Cl. Avg.)</th>
-              <th>Direct CO Attainment In %</th>
-            </tr>
-
-            <tr *ngFor="let c of co;index as index">
-              <td>CO{{index+1}}</td>
-              <td *ngIf="c.ISE1*1 + c.ISE2*1 != 0">{{100*(1*c.ISE1A + 1*c.ISE2A)/(c.ISE1*1 + c.ISE2*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.ISE1*1 + c.ISE2*1 === 0"> </td>
-
-              <!-- <td>{{c.ISE2A}}</td> -->
-              <td *ngIf="c.MSE*1 != 0">{{100*(c.MSEA)/(c.MSE*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.MSE*1 === 0"> </td>
-
-              <td *ngIf="c.ESE*1 != 0">{{100*(c.ESEA)/(c.ESE*1) | number : '1.2-2' }}%</td>
-              <td *ngIf="c.ESE*1 === 0"> </td>
-
-              <td>
-                {{c.obt | number : '1.2-2' }} out of {{c.p}}</td>
-              <td>{{c.dv}}</td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-    </div>
-
-    <u>
-      <h6 class="space">CO Attainment and Attainment Gap Modification of target where achieved</h6>
-    </u>
-
-    <div *ngIf="co && course_details">
-      <div class="table-sm" id="list">
-        <table class="table">
-
-          <tbody>
-            <tr>
-              <th>CL</th>
-              <th>Direct CO Assignment</th>
-              <!-- <th>IE</th> -->
-              <th>CO Target</th>
-              <th>CO Attainment Gap</th>
-              <th>Required to Modify target Yes/No</th>
-            </tr>
-
-            <tr *ngFor="let c of co;index as index">
-              <td>CO{{index+1}}</td>
-              <td>{{c.dv}}</td>
-              <!-- <td>{{c.ISE2A}}</td> -->
-              <td>60</td>
-              <td>{{c.dv-60}}</td>
-              <td *ngIf="!yesno(index)">Yes</td>
-              <td *ngIf="yesno(index)">No</td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-    </div>
-
-    <div *ngIf="co && course_details">
-      <h6 class = "space">PO attainment(direct method)</h6>
-      <div class="table-sm" id="list">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>PO</th>
               <th>CO</th>
-              <th>CO attainment</th>
-              <th>Avg</th>
-              <th>Weight=Level/3</th>
-              <th>Weighted Avg.%</th>
+              <th>Course Outcome</th>
+              <th>Bloom Level</th>
+              <th>Assessment Tool</th>
+              <th>PO_Competency_PI</th>
+            </tr>
+
+            <tr *ngFor="let c of co;index as index">
+              <td>CO{{index+1}}</td>
+              <td>{{c.Course_Outcome}}</td>
+              <td><p>{{c.Bloom_Level[0]}}</p><p>{{c.Bloom_Level[1]}}</p></td>
+              <td><p *ngFor="let x of co[index].CO_Assessment;index as i">{{x}}</p></td>
+              <td><p *ngFor="let x of co[index].PI_map;index as i">{{x}}</p></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div><br><br>
+
+    <u>
+      <h6 class="space">Table 4: Course Outcomes Attainment:</h6>
+    </u>
+
+    <div *ngIf="co && course_details">
+      <div class="table-sm" id="list">
+        <table class="table">
+
+          <tbody>
+            <tr>
+              <th rowspan="2">CO</th>
+              <th colspan="3">ISE</th>
+              <th>ISE CO Attainment</th>
+              <th>MSE Class Avg%</th>
+              <th>MSE CO Attainment</th>
+              <th>ESE Class Avg%</th>
+              <th>ESE CO Attainment</th>
+              <th>Direct CO Attainment Level</th>
+              <th>Indirect CO Attainment %</th>
+              <th>Indirect CO Attainment Level</th>
+            </tr>
+
+            <tr>
+              <td>ISE1</td>
+              <td>ISE2</td>
+              <td>Class Avg.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr *ngFor="let c of co;index as index">
+              <td>CO{{index+1}}</td>
+              <td>{{c.ISE1}}</td>
+              <td>{{c.ISE2}}</td>
+              <td>{{c.ISEAvg}}</td>
+              <td>{{c.ISEA}}</td>
+              <td>{{c.MSE}}</td>
+              <td>{{c.MSEA}}</td>
+              <td>{{c.ESE}}</td>
+              <td>{{c.ESEA}}</td>
+              <td>{{c.dv | number : '1.2-2'  }}</td>
+              <td>{{ (((c.course_exit[2])*3 + (c.course_exit[1])*2 + 1*(c.course_exit[0]))/((1*(c.course_exit[2]) + 1*(c.course_exit[1]) + 1*(c.course_exit[0]))*3))*100  | number : '1.2-2'   }}</td>
+              <td>{{c.CSA}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div><br><br>
+
+    <u>
+      <h6 class="space">Table 5: CO Quality closure loop table</h6>
+    </u>
+
+    <div *ngIf="co && course_details">
+      <div class="table-sm" id="list">
+        <table class="table">
+
+          <tbody>
+            <tr>
+              <th>CO</th>
+              <th>Direct CO Attainment Level</th>
+              <th>Indirect CO Attainment Level</th>
+              <th>Total Attainment(0.8*Direct Attainment + 0.2*Indirect Attainment)</th>
+              <th>CO target %</th>
+              <th>CO target level</th>
+              <th>Action Plan(Total attainment < CO target Level)</th>
+              <th>Modification of target when achieved(Total attainment >= CO target Level)</th>
+            </tr>
+
+            <tr *ngFor="let c of co;index as index">
+              <td>CO{{index+1}}</td>
+              <td>{{c.dv | number : '1.2-2'  }}</td>
+              <td>{{c.CSA}}</td>
+              <td>{{c.Total_Attainment | number : '1.2-2'  }}</td>
+              <td>{{c.CO_Target}}</td>
+              <td>{{(c.CO_Target/100)*3 | number : '1.2-2' }}</td>
+              <td>{{c.Action_plan}}</td>
+              <td>{{c.Modification_plan}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div><br><br>
+
+    <div *ngIf="co && course_details">
+      <h6 class = "space">Table : 6  PO/PSO attainment table</h6>
+      <div class="table-sm" id="list">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>PO/PSO attainment</th>
+              <th>Correlation/strength</th>
+              <th>COs</th>
+              <th>Overall Direct attainment Level(D)</th>
+              <th>Overall  InDirect attainment Level(ID)</th>
+              <th>Action plan From table 5 Consolidated as per PO</th>
             </tr>
 
             <ng-container *ngFor="let p of po;index as i">
@@ -397,17 +372,17 @@
                 <!-- <div *ngIf="p"> -->
                   <td [attr.rowspan] = "p.CO_list.length" *ngIf="i < 12">PO{{ i+1 }}</td>
                   <td [attr.rowspan] = "p.CO_list.length" *ngIf="i>=12">PSO{{ i-11 }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length">{{ p.Level }}</td>
                   <td>CO{{ p.CO_list[0]+1 }}</td>
-                  <td>{{ co[p.CO_list[0]].dv   | number : '1.2-2'  }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ p.Direct_PO   | number : '1.2-2'  }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ (p.Level)/3   | number : '1.2-2'   }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ (p.Direct_PO)*(p.Level)/3   | number : '1.2-2'  }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length">{{ p.dir   | number : '1.2-2'  }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length">{{ p.indir   | number : '1.2-2'   }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length">{{p.PO_Action}}</td>
                 <!-- </div> -->
               </tr>
               <ng-container *ngFor="let c of p.CO_list;index as in">
                 <tr *ngIf = "in!=0">
                   <td>CO{{ c+1 }}</td>
-                  <td>{{ co[c].dv   | number : '1.2-2'   }}</td>
+                  <!-- <td>{{ co[c].dv   | number : '1.2-2'   }}</td> -->
                 </tr>
               </ng-container>
             </ng-container>
@@ -417,145 +392,10 @@
       </div>
     </div>
 
-    <div *ngIf="co && course_details">
-      <h6 class = "space">Course Exit Surveys (Indirect Method)</h6>
-      <div class="table-sm" id="list">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>CO</th>
-              <th>No. of 3s</th>
-              <th>No. of 2s</th>
-              <th>No. of 1s</th>
-              <th>Ave</th>
-            </tr>
+    <p>Overall Direct attainment Level=
+      Avg.attainment of (COs mapped to that PO)*correlation/3
+      ={{final_attainment[0] | number : '1.2-2' }}</p>
+    <p>Overall Indirect attainment Level=
+      Avg.attainment of (COs mapped to that PO)*correlation/3
+      ={{final_attainment[1] | number : '1.2-2' }}</p>
 
-            <tr *ngFor="let co of co;index as i">
-              <td>CO{{i+1}}</td>
-              <td>{{co.course_exit[2]}}</td>
-              <td>{{co.course_exit[1]}}</td>
-              <td>{{co.course_exit[0]}}</td>
-              <td>{{ (((co.course_exit[2])*3 + (co.course_exit[1])*2 + 1*(co.course_exit[0]))/((1*(co.course_exit[2]) + 1*(co.course_exit[1]) + 1*(co.course_exit[0]))*3))*100  | number : '1.2-2'  }}</td>
-            </tr>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div *ngIf="co && course_details">
-      <h6 class = "space">PO attainment(indirect method)</h6>
-      <div class="table-sm" id="list">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>PO</th>
-              <th>CO</th>
-              <th>CO attainment</th>
-              <th>Avg</th>
-              <th>Weight=Level/3</th>
-              <th>Weighted Avg.%</th>
-            </tr>
-
-            <ng-container *ngFor="let p of po;index as i">
-              <tr *ngIf="p.CO_list.length != 0">
-                <!-- <div *ngIf="p"> -->
-                  <td [attr.rowspan] = "p.CO_list.length" *ngIf="i < 12">PO{{ i+1 }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length" *ngIf="i>=12">PSO{{ i-11 }}</td>
-                  <td>CO{{ p.CO_list[0]+1 }}</td>
-                  <td>{{ ((co[p.CO_list[0]].course_exit[2])*3 + (co[p.CO_list[0]].course_exit[1])*2 + (co[p.CO_list[0]].course_exit[0])*1)/((co[p.CO_list[0]].course_exit[2]*1 + co[p.CO_list[0]].course_exit[1]*1 + co[p.CO_list[0]].course_exit[0]*1)*3)*100   | number : '1.2-2'  }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ p.Indirect_PO   | number : '1.2-2' }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ (p.Level)/3   | number : '1.2-2'  }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ (p.Indirect_PO)*(p.Level)/3   | number : '1.2-2'   }}</td>
-                <!-- </div> -->
-              </tr>
-              <ng-container *ngFor="let c of p.CO_list;index as in">
-                <tr *ngIf = "in!=0">
-                  <td>CO{{ c+1 }}</td>
-                  <td>{{ ((co[c].course_exit[2])*3 + (co[c].course_exit[1])*2 + (co[c].course_exit[0])*1)/((co[c].course_exit[2]*1 + co[c].course_exit[1]*1 + co[c].course_exit[0]*1)*3)*100   | number : '1.2-2'  }}</td>
-                </tr>
-              </ng-container>
-            </ng-container>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div *ngIf="co && course_details">
-      <h6 class = "space">Attainment of POs and PSOs</h6>
-      <div class="table-sm" id="list">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>Course</th>
-              <th>PO1</th>
-              <th>PO2</th>
-              <th>PO3</th>
-              <th>PO4</th>
-              <th>PO5</th>
-              <th>PO6</th>
-              <th>PO7</th>
-              <th>PO8</th>
-              <th>PO9</th>
-              <th>PO10</th>
-              <th>PO11</th>
-              <th>PO12</th>
-              <th>PSO1</th>
-              <th>PSO2</th>
-              <th>PSO3</th>
-            </tr>
-
-            <tr> 
-              <td>CSM</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.Level}}</td>
-              </ng-container>
-            </tr>
-
-            <tr> 
-              <td>D:Attainment(Direct)</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.Direct_PO | number : '1.2-2' }}</td>
-              </ng-container>
-            </tr>
-
-            <tr> 
-              <td>D:Attainment level- Direct- L1</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.L1}}</td>
-              </ng-container>
-            </tr>
-
-            <tr> 
-              <td>I:Attainment(Indirect)Score</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.Indirect_PO | number : '1.2-2' }}</td>
-              </ng-container>
-            </tr>
-
-            <tr> 
-              <td>I:Attainment(Indirect)-L2</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.L2}}</td>
-              </ng-container>
-            </tr>
-
-            <tr> 
-              <td> PO Attainment(0.8xL1 + 0.2xL2)</td> 
-              <ng-container *ngFor="let p of po;index as i">
-                  <td>{{p.L1*0.8 + p.L2*0.2 | number : '1.2-2'  }}</td>
-              </ng-container>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- </cdk-virtual-scroll-viewport> -->
-
-<!-- <app-login></app-login> -->

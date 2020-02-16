@@ -13,8 +13,28 @@
                                 <input id="cognitive_level-{{num}}" formControlName="Cognitive_Level" type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                    <label for="session">No of Sessions</label>
-                                    <input id="session-{{num}}" formControlName="No_of_hours" type="text" class="form-control">
+                                    <label for="session">CO Target</label>
+                                    <input id="session-{{num}}" formControlName="CO_Target" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="session">Strength</label>
+                                <input id="session-{{num}}" formControlName="No_of_hours" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="session">Bloom Level</label>
+                                <input id="session-{{num}}" formControlName="Bloom_Level" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="session">Bloom Level Code</label>
+                                <input id="session-{{num}}" formControlName="Bloom_Level_Code" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="session">Action Plan(If Target Not Achieved)</label>
+                                <input id="session-{{num}}" formControlName="Action_Plan" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="session">Modification Plan(If Target Achieved)</label>
+                                <input id="session-{{num}}" formControlName="Modification_Plan" type="text" class="form-control">
                             </div>
                             <div class="center">    
                                     <button id="initial_btn-{{num}}" class="btn btn-sm btn-info" type="submit" (click)="access($event,num)" [disabled]="false" matStepperNext #ref>Move To Next</button>
@@ -25,6 +45,6 @@
                     </div>
             </mat-horizontal-stepper>
             <div class="center">    
-                    <button class="btn btn-sm btn-primary" [disabled]="true" matStepperNext #btn>Proceed</button>
+                    <button class="btn btn-sm btn-primary" (click) = "Save($event)" [disabled]="true" matStepperNext #btn>Proceed</button>
                 </div>
             

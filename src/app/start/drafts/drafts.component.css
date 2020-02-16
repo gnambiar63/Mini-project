@@ -1,0 +1,16 @@
+.cardspace{
+    padding-bottom: 15px;
+}
+.card{
+    text-align: center;
+    background-color: #FFF2E9;
+    border: 0;
+}
+#PDF{
+    width: 120px;
+    height:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top:20px;
+}

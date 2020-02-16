@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/shared/account.service';
-import { CO } from 'src/app/shared/CO.model';
-import { PO } from 'src/app/shared/PO.model';
-import { StorageService } from 'src/app/shared/storage.service';
+import { AccountService } from '../../../shared/account.service';
+import { CO } from '../../../shared/CO.model';
+import { PO } from '../../../shared/PO.model';
+import { StorageService } from '../../../shared/storage.service';
 import { MatStepper } from '@angular/material';
 
 @Component({
@@ -128,5 +128,13 @@ export class COPOMappingComponent implements OnInit {
     this.account_service.PO_Total();
     // this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
+    this.account_service.save_draft().subscribe(
+      (res)=>{
+        console.log("File saved")
+      },
+      (err)=>{
+        console.log("Failed!!")
+      }
+    );
   }
 }

@@ -10,4 +10,8 @@ export interface PO{
     L1:number;
     L2:number;
 
+    dir:number;
+    indir:number;
+    PO_Action:string;
+
 }

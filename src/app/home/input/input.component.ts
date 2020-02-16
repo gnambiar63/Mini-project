@@ -50,7 +50,11 @@ export class InputComponent implements OnInit {
           Direct_PO:0,
           Indirect_PO:0,
           L1:0,
-          L2:0
+          L2:0,
+
+          dir:0,
+          indir:0,
+          PO_Action:"",
         };
         this.po.push(val);
       }
@@ -125,7 +129,11 @@ export class InputComponent implements OnInit {
           Course_Outcome : "",
           Cognitive_Level : "",
           No_of_hours : "",
+          CO_Target:0,
+          Bloom_Level:["",""],
           PO_map : [],
+          CO_Assessment : [],
+          PI_map : [],
           ISE1 : 0,
           ISE2 : 0,
           MSE : 0,
@@ -133,8 +141,17 @@ export class InputComponent implements OnInit {
   
           ISE1A:0,
           ISE2A:0,
+
+          ISEAvg:0,
+          ISEA:0,
           MSEA:0,
           ESEA:0,
+          CSA:0,
+          Total_Attainment:0,
+
+          Action:false,
+          Action_plan:"",
+          Modification_plan:"",
   
           p:0,
           obt:0,
@@ -160,6 +177,15 @@ export class InputComponent implements OnInit {
     console.log(this.account_service.co)
     this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
+
+    this.account_service.save_draft().subscribe(
+      (res)=>{
+        console.log("File saved")
+      },
+      (err)=>{
+        console.log("Failed!!")
+      }
+    );
   }
 
 }

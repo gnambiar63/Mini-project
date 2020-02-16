@@ -19,6 +19,13 @@ import { COPOMappingComponent } from './home/input/co-po-mapping/co-po-mapping.c
 import { MarksDistributionComponent } from './home/input/marks-distribution/marks-distribution.component';
 import { AttainmentComponent } from './home/input/attainment/attainment.component';
 import { CourseExitComponent } from './home/input/course-exit/course-exit.component';
+import { StartComponent } from './start/start.component';
+import { MatSidenavModule} from '@angular/material';
+import {MatRadioModule} from '@angular/material/radio';
+import { AssessmentComponent } from './home/input/assessment/assessment.component';
+import { CoPiMappingComponent } from './home/input/co-pi-mapping/co-pi-mapping.component';
+import { DraftsComponent } from './start/drafts/drafts.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +41,10 @@ import { CourseExitComponent } from './home/input/course-exit/course-exit.compon
     MarksDistributionComponent,
     AttainmentComponent,
     CourseExitComponent,
+    StartComponent,
+    AssessmentComponent,
+    CoPiMappingComponent,
+    DraftsComponent,
     
   ],
   imports: [
@@ -44,7 +55,9 @@ import { CourseExitComponent } from './home/input/course-exit/course-exit.compon
     HttpClientModule,
     ScrollingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    MatSidenavModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

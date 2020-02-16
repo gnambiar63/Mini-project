@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/shared/account.service';
-import { CO } from 'src/app/shared/CO.model';
+import { AccountService } from '../../../shared/account.service';
+import { CO } from '../../../shared/CO.model';
 import { MatStepper } from '@angular/material';
-import { StorageService } from 'src/app/shared/storage.service';
+import { StorageService } from '../../../shared/storage.service';
 
 @Component({
   selector: 'app-course-exit',
@@ -55,11 +55,7 @@ export class CourseExitComponent implements OnInit {
   {
     let x = document.getElementById("coex-"+String(this.stepper._steps.length-1));
     x.innerHTML="Save Changes";
-    if(i >= this.stepper._steps.length-1)
-    {
-      this.final_button.nativeElement.disabled = false;
-      (document.getElementById("coex-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
-    }
+
   }
 
   CO_submit(num){
@@ -90,11 +86,26 @@ export class CourseExitComponent implements OnInit {
         No1:this.co[num+1].course_exit[1]
       });
     }
+
+    if(num >= this.stepper._steps.length-1)
+    {
+      this.final_button.nativeElement.disabled = false;
+      (document.getElementById("coex-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
+    }
   }
   Update_Indirect_PO(event : Event)
   {
-    this.account_service.Indirect_PO();
+    this.account_service.New_Direct_Course_Exit_Attainment();
     // this.storage.setCOValue(this.account_service.co)
+    this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
+    this.account_service.save_draft().subscribe(
+      (res)=>{
+        console.log("File saved")
+      },
+      (err)=>{
+        console.log("Failed!!")
+      }
+    );
   }
 }

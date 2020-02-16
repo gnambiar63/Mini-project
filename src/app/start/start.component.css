@@ -1,0 +1,31 @@
+.example-container {
+    position : relative;
+    height: 85%;
+    background-color: #FFF2E9;
+
+  }
+  
+  .example-radio-group {
+    display: block;
+    border: 1px solid #555;
+    margin: 20px;
+    padding: 10px;
+  }
+  
+.toggle_in{
+    position:absolute;
+    top : 45%;
+    left: 0px;
+}
+ .sidebar{
+    width:15%;
+    text-align: center;
+    font-size: 40px;
+    background-color: #FFECE9;
+ }
+ .sidebar_text{
+    font-size: 20px;
+ }
+ .context{
+     margin-left:5%;
+ }

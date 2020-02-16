@@ -45,19 +45,26 @@
         <mat-step label="CO-PO Mapping">
                 <app-co-po-mapping></app-co-po-mapping>
         </mat-step>
+        <mat-step label="CO Assessment">
+            <app-assessment></app-assessment>
+        </mat-step>
+        <mat-step label="PI Mapping">
+            <app-co-pi-mapping></app-co-pi-mapping>
+        </mat-step>
         <!-- <mat-step label="Mapping Justification">
             <p>CO-PO Mapping</p>
         </mat-step> -->
         <mat-step label="Marks Distribution">
                 <app-marks-distribution></app-marks-distribution>
         </mat-step>
-        <mat-step label="Attainment">
-            <app-attainment></app-attainment>
-        </mat-step>
         <mat-step label="Course Exit Survey">
             <app-course-exit></app-course-exit>
         </mat-step>
-        <mat-step label="Export">
+        <mat-step label="PO Action">
+            <app-attainment></app-attainment>
+        </mat-step>
+        <mat-step label="Print">
+            <br>
             <div class="center">  
                 <button class="btn btn-success btn-lg" (click)="print($event)">Print Paper</button>
             </div>

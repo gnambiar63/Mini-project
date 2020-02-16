@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.value = '1';
         this.account_service.changeEmail(res.Email)
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/start');
         this.loginEvent.emit(res.Email);
       },
       (err)=> 

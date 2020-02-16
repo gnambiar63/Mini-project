@@ -1,0 +1,14 @@
+<h1 style="text-align:center;">Drafts</h1>
+<div class="row">
+    <div class="col-lg-4 cardspace" *ngFor="let p of papers,index as index">
+        <div class="card" colspan="4">
+            <img class="card-img-top" id = "PDF" src="../assets/PDF_file_icon.png" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">Subject Code:{{p.Subject_Code}}</h5>
+            <p class="card-text">Subject:{{p.Data.Main_Details[0]}}</p>
+            <button class="btn btn-primary" (click)="Set_Value($event,index)">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+  

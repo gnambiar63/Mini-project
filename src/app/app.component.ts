@@ -18,16 +18,17 @@ export class AppComponent {
         this.email = data;
         if(data)
         {
-          localStorage.setItem('Email', data);
+          sessionStorage.setItem('Email', data);
         }
-        console.log(localStorage.getItem('Email'))
+        console.log(sessionStorage.getItem('Email'))
         // console.log(this.co);
       });
   }
   ngOnInit(){
-    if(localStorage.getItem('Email'))
+    if(sessionStorage.getItem('Email'))
     {
-      this.email = localStorage.getItem('Email');
+      this.email = sessionStorage.getItem('Email');
+      this.account_service.email = this.email
     }
     console.log("This is "+this.email)
     this.onResize(null);

@@ -1,21 +1,23 @@
 <p style="text-align: center;"><strong>Details of each CO</strong></p>
                 <mat-horizontal-stepper linear class="step" #stepper>
-                <div class="co_details"  *ngFor="let i of co;index as num">
-                    <mat-step label="CO{{num+1}}">
-                        <p style="text-align: center;"><strong>Average Values of each CO</strong></p>
-                        <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks(num)">
-                            <div class="form-group" *ngFor="let p of exam;index as index">
-                                    {{p}}:
-                                    <input type="text" class="form-control" formControlName="{{p}}" name = "{{p}}">
-                            </div>
-                            
-                            <div class="center">    
-                                    <button id="at-{{num}}" class="btn btn-sm btn-info" matStepperNext (click)="access($event,num)" type="submit">Move To Next</button>
-                            </div>
-                        </form>
-                    </mat-step>
+                <div class="co_details"  *ngFor="let i of po;index as num">
+                    <div *ngIf="i.CO_list.length != 0">
+                        <mat-step label="PO{{num+1}}">
+                            <p style="text-align: center;"><strong>Action Plan as per PO</strong></p>
+                            <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks(num)">
+                                <div class="form-group">
+                                        Action Plan
+                                        <input type="text" class="form-control" formControlName="Action_Plan" name = "Action">
+                                </div>
+                                
+                                <div class="center">    
+                                        <button id="at-{{ctr}}" class="btn btn-sm btn-info" matStepperNext (click)="access($event,num)" type="submit">Move To Next</button>
+                                </div>
+                            </form>
+                        </mat-step>
                     </div>
+                </div>
             </mat-horizontal-stepper>
             <div class="center">    
-                    <button class="btn btn-sm btn-primary" (click)="Update_Direct_PO($event)" matStepperNext [disabled]="true" #btn>Proceed</button>
+                    <button class="btn btn-sm btn-primary" (click) = "Save($event)"  matStepperNext #btn>Proceed</button>
                 </div>
