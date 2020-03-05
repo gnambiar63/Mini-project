@@ -228,12 +228,25 @@ export class AccountService {
      {
       for(let i=0;i<this.co.length;i++)
       {
-        let num = 2;
-        if(this.co[i].ISE1 == 0 || this.co[i].ISE2 == 0)
+        let num = 4;
+        if(this.co[i].ISE1 == 0)
         {
           num--;
         }
-        this.co[i].ISEAvg = (this.co[i].ISE1 + this.co[i].ISE2)/num;
+        if(this.co[i].ISE2 == 0)
+        {
+          num--;
+        }
+        if(this.co[i].ISE3 == 0)
+        {
+          num--;
+        }
+        if(this.co[i].ISE4 == 0)
+        {
+          num--;
+        }
+        this.co[i].ISEAvg = (Number(this.co[i].ISE1) + Number(this.co[i].ISE2) + Number(this.co[i].ISE3) + Number(this.co[i].ISE4));
+        this.co[i].ISEAvg /= num;
         if(this.co[i].ISEAvg > 70)
         {
          this.co[i].ISEA = 3;

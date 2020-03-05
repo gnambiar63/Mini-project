@@ -166,6 +166,8 @@ export class InputComponent implements OnInit {
           PI_map : [],
           ISE1 : 0,
           ISE2 : 0,
+          ISE3 : 0,
+          ISE4 : 0,
           MSE : 0,
           ESE : 0,
   

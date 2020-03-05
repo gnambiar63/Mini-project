@@ -18,7 +18,7 @@ export class MarksDistributionComponent implements OnInit {
 
   marks_dist:FormGroup;
   co:Array<CO>;
-  exam :Array<string>=["ISE1","ISE2","MSE","ESE"];
+  exam :Array<string>=["ISE1","ISE2","ISE3","ISE4","MSE","ESE"];
   exam_values:Array<string>=[];
 
   constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) {
@@ -30,6 +30,8 @@ export class MarksDistributionComponent implements OnInit {
     this.marks_dist=this.fb.group({
       ISE1:['',Validators.required],
       ISE2:['',Validators.required],
+      ISE3:['',Validators.required],
+      ISE4:['',Validators.required],
       MSE:['',Validators.required],
       ESE:['',Validators.required]
     })
@@ -45,6 +47,8 @@ export class MarksDistributionComponent implements OnInit {
         this.marks_dist.setValue({
           ISE1:this.co[0].ISE1,
           ISE2:this.co[0].ISE2,
+          ISE3:this.co[0].ISE2,
+          ISE4:this.co[0].ISE2,
           MSE:this.co[0].MSE,
           ESE:this.co[0].ESE
         });
@@ -64,6 +68,8 @@ export class MarksDistributionComponent implements OnInit {
   //  console.log(this.marks_dist.value); 
    this.account_service.co[num].ISE1=this.marks_dist.controls['ISE1'].value;
    this.account_service.co[num].ISE2=this.marks_dist.controls['ISE2'].value;
+   this.account_service.co[num].ISE3=this.marks_dist.controls['ISE3'].value;
+   this.account_service.co[num].ISE4=this.marks_dist.controls['ISE4'].value;
    this.account_service.co[num].MSE=this.marks_dist.controls['MSE'].value;
    this.account_service.co[num].ESE=this.marks_dist.controls['ESE'].value;
 
@@ -74,6 +80,8 @@ export class MarksDistributionComponent implements OnInit {
      this.marks_dist.setValue({
        ISE1:this.co[num+1].ISE1,
        ISE2:this.co[num+1].ISE2,
+       ISE3:this.co[num+1].ISE3,
+       ISE4:this.co[num+1].ISE4,
        MSE:this.co[num+1].MSE,
        ESE:this.co[num+1].ESE
      });

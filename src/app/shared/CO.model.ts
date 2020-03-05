@@ -12,6 +12,8 @@ export interface CO{
     PI_map:Array<string>;
     ISE1:number;        //marks obtainable
     ISE2:number;
+    ISE3:number;
+    ISE4:number;
     MSE:number;
     ESE:number;
 
