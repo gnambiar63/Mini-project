@@ -29,6 +29,7 @@ export class InputComponent implements OnInit {
   co:Array<CO>=[];
   po:Array<PO>=[];
   marks_dist: FormGroup;
+  prerequisites:Array<String>;
 
   
   constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) {
@@ -36,7 +37,8 @@ export class InputComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(!this.storage.getPOValue())
+    //console.log("Hi")
+    if(!this.storage.getPOValue() || this.storage.getPOValue().length == 0)
     {
       for(let i=0;i<15;i++)
         {
@@ -59,6 +61,7 @@ export class InputComponent implements OnInit {
         this.po.push(val);
       }
       this.account_service.po=this.po;
+      //console.log(this.account_service.po)
     
     }
       
@@ -71,7 +74,12 @@ export class InputComponent implements OnInit {
       semester:['',[Validators.required,]],
       credits:['',[Validators.required,]],
       ltp:['',[Validators.required,]],
-      co:['',[Validators.required,]]
+      co:['',[Validators.required,]],
+      ise:['',[Validators.required,]],
+      mse:['',[Validators.required,]],
+      ese:['',[Validators.required,]],
+      total:['',[Validators.required,]],
+      faculty:['',[Validators.required,]]
     })
   
       this.account_service.demo=this.course_details.valueChanges;
@@ -88,7 +96,12 @@ export class InputComponent implements OnInit {
           semester:this.account_service.main_course_details[3],
           credits:this.account_service.main_course_details[4],
           ltp:this.account_service.main_course_details[5],
-          co:this.account_service.main_course_details[6]
+          co:this.account_service.main_course_details[6],
+          ise:this.account_service.main_course_details[8],
+          mse:this.account_service.main_course_details[9],
+          ese:this.account_service.main_course_details[10],
+          total:this.account_service.main_course_details[11],
+          faculty:this.account_service.main_course_details[12]
         });
       }
     });
@@ -100,8 +113,8 @@ export class InputComponent implements OnInit {
   }
 
   coursesubmit(){
-    console.log("Ahead");
-    console.log(this.course_details.value);
+    ////console.log("Ahead");
+    ////console.log(this.course_details.value);
 
     this.co=this.account_service.co;
     this.po=this.account_service.po;
@@ -115,7 +128,24 @@ export class InputComponent implements OnInit {
     this.account_service.main_course_details[4]=this.course_details.controls["credits"].value;
     this.account_service.main_course_details[5]=this.course_details.controls["ltp"].value;
     this.account_service.main_course_details[6]=this.course_details.controls["co"].value;
+    this.account_service.main_course_details[8]=this.course_details.controls["ise"].value;
+    this.account_service.main_course_details[9]=this.course_details.controls["mse"].value;
+    this.account_service.main_course_details[10]=this.course_details.controls["ese"].value;
+    this.account_service.main_course_details[11]=this.course_details.controls["total"].value;
+    this.account_service.main_course_details[12]=this.course_details.controls["faculty"].value;
 
+    // if(this.account_service.main_course_details[2]=="1")
+    // {
+    //   ////console.log("Lab");
+      
+    // }
+    // else
+    // {
+    //   ////console.log("Theory");
+      
+    // }
+
+    
     this.storage.setCourseDetailsValue(this.account_service.main_course_details);
 
     var addvar = this.course_details.controls['co'].value - this.co.length;
@@ -170,20 +200,20 @@ export class InputComponent implements OnInit {
       {
         this.co.pop();
       }
-      console.log(this.co.length)
+      //console.log(this.co.length)
     }
     
     this.account_service.co=this.co;
-    console.log(this.account_service.co)
+    //console.log(this.account_service.co)
     this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
 
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        //console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        //console.log("Failed!!")
       }
     );
   }

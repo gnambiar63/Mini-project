@@ -1,8 +1,8 @@
-<p style="text-align: center;"><strong>Details of each CO</strong></p>
+<p style="text-align: center;"><strong>Marks Distribution in %</strong></p>
                 <mat-horizontal-stepper linear class="step" #stepper>
                 <div class="co_details"  *ngFor="let i of co;index as num">
                     <mat-step label="CO{{num+1}}">
-                        <p style="text-align: center;"><strong>Course Details</strong></p>
+                        <p style="text-align: center;"><strong>Add marks as the percentage of the avg marks of class </strong></p>
                         <form class="marks_dist" [formGroup]="marks_dist" (ngSubmit)="marks(num)">
                             <div class="form-group" *ngFor="let p of exam;index as index">
                                     {{p}}:

@@ -1,0 +1,23 @@
+<p style="text-align: center;"><strong>Prerequisites</strong></p>
+
+                        <!-- <cdk-virtual-scroll-viewport id = "alert_demo" itemSize='4'> -->
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngFor='let p of preq;index as index'>
+                            <button class="close" data-dismiss="alert" aria-label="close" (click)="del($event,index)">&times;</button>
+                            {{p}}
+                        </div>
+                        <!-- </cdk-virtual-scroll-viewport> -->
+                            <form class="PO_details" [formGroup]="PO_details" (ngSubmit)="PO_submit()">
+                            <div class="form-group">
+                                <label for="po_pso">Add Prerequisites</label>
+                                <div class="input-group mb-3">
+                                    <input id="po_pso" formControlName="po_pso" name = "po_pso" type="text" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-info" type="submit">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+            <br>
+            <div class="center">    
+                <button class="btn btn-sm btn-primary" (click) = "Save($event)" matStepperNext #btn>Proceed</button>
+            </div>

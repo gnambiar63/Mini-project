@@ -40,6 +40,7 @@ export class PaperComponent implements OnInit {
 
   public final_attainment:Array<number>;
 
+  public show = []
 
 
   public course_details_display = {
@@ -56,17 +57,17 @@ export class PaperComponent implements OnInit {
     this.account_service.currentMessage
       .subscribe(data => {
         this.co = data;
-        console.log(this.co);
+        //console.log(this.co);
       });
 
     this.account_service.currentData
       .subscribe(data => {
         this.final_attainment = data;
-        console.log(this.final_attainment);
+        //console.log(this.final_attainment);
       });
 
       this.po = this.account_service.po;
-      console.log("Called it")
+      //console.log("Called it")
 
   }
   
@@ -76,10 +77,12 @@ export class PaperComponent implements OnInit {
   ngOnInit() {
     // this.course_details=this.account_service.course_details;
     this.po = this.account_service.po;
-    console.log("Enter")
-    console.log(this.po)
-    console.log("Exit")
+    //console.log("Enter")
+    //console.log(this.po)
+    //console.log("Exit")
     this.co = this.account_service.co;
+    this.show = this.account_service.main_course_details;
+    //console.log(this.account_service.main_course_details)
 
     this.final_attainment = [0,0]
     
@@ -93,7 +96,7 @@ export class PaperComponent implements OnInit {
         this.course_details_display.credits = res.credits
         this.course_details_display.ltp = res.ltp
         this.course_details_display.co = res.co
-        console.log(res);
+        //console.log(res);
       }
       
     );
@@ -103,10 +106,10 @@ export class PaperComponent implements OnInit {
   }
   test()
   {
-    console.log(this.co)
+    //console.log(this.co)
     this.co=this.account_service.co;
     this.po=this.account_service.po;
-    console.log(this.co)
+    //console.log(this.co)
     this.testing=true;
   }
 
@@ -114,23 +117,23 @@ export class PaperComponent implements OnInit {
   {
     if(this.co[index].PO_map.includes("PO"+(x+1)))
     {
-      // console.log('true');
+      // //console.log('true');
       if(this.confirm_total[x]<=index)
       {
         this.PO_total[x] += Number(this.co[index].No_of_hours); 
         this.confirm_total[x]=index+1;
-        console.log("worked")
+        //console.log("worked")
       }
-      // console.log(this.PO_total)
-      // console.log(index+":"+x)
+      // //console.log(this.PO_total)
+      // //console.log(index+":"+x)
       // this.storage.setCOValue(this.account_service.co)
       this.storage.setPOValue(this.account_service.po)
       return true;
     }
     else
     {
-      // console.log('false');
-      // console.log("PO"+(x+1));
+      // //console.log('false');
+      // //console.log("PO"+(x+1));
       return false;
     }
   }
@@ -139,12 +142,12 @@ export class PaperComponent implements OnInit {
   {
     if(this.co[index].PO_map.includes("PSO"+(x+1)))
     {
-      // console.log('true');
+      // //console.log('true');
       if(this.confirm_total[x+12]<=index)
       {
         this.PO_total[x+12] += Number(this.co[index].No_of_hours); 
         this.confirm_total[x+12]+=1;
-        console.log("worked")
+        //console.log("worked")
       }
       // this.storage.setCOValue(this.account_service.co)
       this.storage.setPOValue(this.account_service.po)
@@ -152,8 +155,8 @@ export class PaperComponent implements OnInit {
     }
     else
     {
-      // console.log('false');
-      // console.log("PO"+(x+1));
+      // //console.log('false');
+      // //console.log("PO"+(x+1));
       return false;
     }
   }
@@ -164,7 +167,7 @@ export class PaperComponent implements OnInit {
   //   for(let i=0;i<12;i++)
   //   {
   //     var p = document.getElementsByClassName(i.toString());
-  //     console.log(p);
+  //     //console.log(p);
   //     Array.prototype.forEach.call(p, function(el) {
   //     // Do stuff here
   //     this.add[i] = this.add[i] + el.innerHTML;
@@ -196,7 +199,7 @@ export class PaperComponent implements OnInit {
         this.p.push(this.t);
         this.tindex=index;
       }
-      console.log(this.p);
+      //console.log(this.p);
       return true;
     }
     else

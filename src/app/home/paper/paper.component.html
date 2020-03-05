@@ -30,11 +30,6 @@
             </tr>
 
             <tr>
-              <th>Sessions of Course</th>
-              <td>{{course_details_display.session}}</td>
-            </tr>
-
-            <tr>
               <th>Semester</th>
               <td>{{course_details_display.semester}}</td>
             </tr>
@@ -48,6 +43,39 @@
               <th>L:T:P</th>
               <td>{{course_details_display.ltp}}</td>
             </tr>
+
+            <tr>
+              <th rowspan = "4">Evaluation System</th>
+              <td>ISE : {{show[8]}}</td>
+            </tr>
+
+            <tr>              
+              <td>MSE : {{show[9]}}</td>
+            </tr>
+
+            <tr>              
+              <td>ESE : {{show[10]}}</td>
+            </tr>
+
+            <tr>              
+              <td>Total : {{show[11]}}</td>
+            </tr>
+
+            <tr>
+              <th>Faculty</th>
+              <td>{{show[12]}}</td>
+            </tr>
+
+            <tr *ngIf="show[7] && show[7].length>0">
+              <th [attr.rowspan] = "show[7].length + 1">Prerequisites:</th>
+              <td>1. {{(show[7])[0]}}</td>
+            </tr>
+
+            <tr *ngFor="let p of show[7];index as index;">              
+              <td *ngIf="index!=0">{{index+1}}. {{p}}</td>
+            </tr>
+            
+            
 
           </tbody>
           <!-- <tbody>
@@ -83,7 +111,7 @@
 
     </div>
     <u>
-      <h6 class="space">Course Outcome</h6>
+      <h6 class="space">Course Outcomes (CO):</h6>
     </u>
 
     <div *ngIf="co && course_details">
@@ -95,6 +123,7 @@
               <th>CO</th>
               <th>Course Outcome</th>
               <th>Cognitive Level</th>
+              <th>PO/PSO</th>
               <th>CO Target</th>
             </tr>
 
@@ -102,15 +131,18 @@
               <td>CO{{index+1}}</td>
               <td>{{c.Course_Outcome}}</td>
               <td>{{c.Cognitive_Level}}</td>
-              <td>{{c.CO_Target}}</td>
+              <td>
+                <p *ngFor="let po of co[index].PO_map;p as index">{{po}},</p>
+              </td>
+              <td>{{c.CO_Target}}%</td>
             </tr>
 
-            <tr>
+            <!-- <tr>
               <th></th>
               <th>Total Hours of Instructions</th>
               <th></th>
               <th>{{course_details_display.session}}</th>
-            </tr>
+            </tr> -->
 
           </tbody>
 
@@ -118,7 +150,7 @@
       </div>
     </div><br><br>
 
-    <u>
+    <!-- <u>
       <h6 class="space">CO-PO Mapping</h6>
     </u>
 
@@ -155,10 +187,13 @@
         </table>
 
       </div>
-    </div>
+    </div> -->
 
     <u>
-      <h6 class="space">CO-PO Correlation Matrix</h6>
+      <h6 class="space">Mapping of CO with PO:(correlation/ strength matrix) 
+        Correlation Levels :   1(weak)   2( medium)  3(strong)<br>
+        Table 1: Mapping of CO with PO:(correlation/ strength matrix) 
+        </h6>
     </u>
 
     <div *ngIf="co && course_details">
@@ -260,6 +295,92 @@
     </div><br><br>
 
     <u>
+      <h6 class="space">Table 3: Assessment target Rubric for PO/PSO Attainment 
+        Theory course  Attainment Levels Versus Target:
+        <br><br>Table 2: Course Outcomes Assessment Tools Mapping</h6>
+    </u>
+
+    <div *ngIf="co && course_details">
+      <div class="table-sm" id="list">
+        <table class="table">
+
+          <tbody>
+            <tr>
+              <th rowspan = "2">CO Attainment Method</th>
+              <th colspan = "3">Attainment Level</th>
+            </tr>
+            <tr>
+              <th>1 (low)</th>
+              <th>2 (medium)</th>
+              <th>3 (high)</th>
+            </tr>
+
+            <tr>
+              <th>ESE/MSE</th>
+              <td>< 40% student scoring more than class average in the final examination</td>
+              <td>40-60% student scoring more than class average in the final examination</td>
+              <td>>60% students scoring more class average in the final examination</td>
+            </tr>
+            <tr>
+              <th>ISE</th>
+              <td>< 50% students score more than class average in the internal assessment</td>
+              <td> 50-70% students score more than class average in the internal assessment</td>
+              <td>>70% students score more than class average in the internal assessment</td>
+            </tr>
+            <tr>
+              <th>Course Exit Survey</th>
+              <td>< 60% weight age average in course exit analysis</td>
+              <td>60-80% weight age average in course exit analysis</td>
+              <td>>80% weight age average in course exit analysis</td>
+            </tr>
+
+            
+          </tbody>
+          
+        </table>
+      </div>
+    </div><br><br>
+    
+    <p>Laboratory Course</p>
+
+    <br><br>
+
+
+    <div *ngIf="co && course_details">
+      <div class="table-sm" id="list">
+        <table class="table">
+
+          <tbody>
+            <tr>
+              <th rowspan = "2">CO Attainment Method</th>
+              <th colspan = "3">Attainment Level</th>
+            </tr>
+            <tr>
+              <th>1 (low)</th>
+              <th>2 (medium)</th>
+              <th>3 (high)</th>
+            </tr>
+
+            <tr>
+              <th>ESE/ISE</th>
+              <td>< 60% student scoring more than class average in the final examination</td>
+              <td>60-70% student scoring more than class average in the final examination</td>
+              <td>>80% students scoring more class average in the final examination</td>
+            </tr>
+            <tr>
+              <th>Course Exit Survey</th>
+              <td>< 60% weight age average in course exit analysis</td>
+              <td>60-80% weight age average in course exit analysis</td>
+              <td>>80% weight age average in course exit analysis</td>
+            </tr>
+
+          </tbody>
+          
+        </table>
+      </div>
+    </div><br><br>
+
+    <u>
       <h6 class="space">Table 4: Course Outcomes Attainment:</h6>
     </u>
 
@@ -315,6 +436,20 @@
         </table>
       </div>
     </div><br><br>
+
+    <p>Direct CO attainment Level =0.2*ISE CO Attainment + 0.2*MSE CO Attainment + 0.6*ESE CO Attainment<br><br>
+      Consider the  above formula only if all three assessments tools present. <br><br>
+      If only ESE:<br><br>
+      Direct CO attainment Level =ESE CO Attainment<br><br>
+      If only ISE & ESE: <br><br>
+       Direct CO attainment Level =(0.2*ISE CO Attainment +  0.6*ESE CO Attainment) *1.25<br><br>
+      If only MSE & ESE:<br><br>
+       Direct CO attainment Level =(0.2*MSE CO Attainment +  0.6*ESE CO Attainment) *1.25<br><br>
+      If only MSE and ISE<br><br>
+       Direct CO attainment Level =(0.2*ISE CO Attainment +  0.2*MSE CO Attainment) *2.5<br><br>
+      If only MSE /ISE <br><br>
+       Direct CO attainment Level =(0.2*ISE CO Attainment ) * 5<br><br>
+      </p>
 
     <u>
       <h6 class="space">Table 5: CO Quality closure loop table</h6>
@@ -372,7 +507,7 @@
                 <!-- <div *ngIf="p"> -->
                   <td [attr.rowspan] = "p.CO_list.length" *ngIf="i < 12">PO{{ i+1 }}</td>
                   <td [attr.rowspan] = "p.CO_list.length" *ngIf="i>=12">PSO{{ i-11 }}</td>
-                  <td [attr.rowspan] = "p.CO_list.length">{{ p.Level }}</td>
+                  <td [attr.rowspan] = "p.CO_list.length">{{ p.Level | number : '1.2-2' }}</td>
                   <td>CO{{ p.CO_list[0]+1 }}</td>
                   <td [attr.rowspan] = "p.CO_list.length">{{ p.dir   | number : '1.2-2'  }}</td>
                   <td [attr.rowspan] = "p.CO_list.length">{{ p.indir   | number : '1.2-2'   }}</td>

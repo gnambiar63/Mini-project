@@ -47,8 +47,8 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
 
   access(event : Event,i)
   {
-    console.log(i);
-    console.log(this.CO_details.controls['Course_Outcome'].value)
+    // console.log(i);
+    // console.log(this.CO_details.controls['Course_Outcome'].value)
 
     let x = document.getElementById("initial_btn-"+String(this.stepper._steps.length-1));
     x.innerHTML="Save Changes";
@@ -57,7 +57,7 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     //   this.final_button.nativeElement.disabled = false;
     //   (document.getElementById("initial_btn-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
     // }
-    console.log("done")
+    // console.log("done")
   }
   
   CO_details:FormGroup;
@@ -95,15 +95,15 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     
 
     this.co=this.account_service.co;
-    console.log(this.co)
+    // console.log(this.co)
     // this.account_service.currentMessage.subscribe(message => this.co = message)
 
-    console.log(this.co);
+    // console.log(this.co);
   }
 
   CO_submit(num){
     
-    console.log("1")
+    // console.log("1")
 
 
     this.account_service.co[num].Course_Outcome=this.CO_details.controls['Course_Outcome'].value;
@@ -118,8 +118,8 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
     // this.account_service.change();
     this.account_service.changeMessage(this.co)
     this.storage.setCOValue(this.account_service.co)
-    console.log(this.storage.getCOValue())
-    console.log(this.storage.getPOValue())
+    // console.log(this.storage.getCOValue())
+    // console.log(this.storage.getPOValue())
 
     if(this.account_service.co.length!=0 && num< this.stepper._steps.length-1 && this.CO_details.touched == false  && this.CO_details.dirty == false) //auto fill
     {
@@ -154,10 +154,10 @@ export class CourseOutcomeComponent implements OnInit,AfterViewInit {
   {
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
   }

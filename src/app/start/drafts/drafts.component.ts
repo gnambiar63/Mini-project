@@ -18,15 +18,15 @@ export class DraftsComponent implements OnInit,AfterViewInit {
 }
   ngAfterViewInit()
   {
-    console.log(sessionStorage.getItem('Email'))
+    //console.log(sessionStorage.getItem('Email'))
     this.account_service.find_draft().subscribe(
       (res)=> {
-        console.log(res);
+        //console.log(res);
         this.papers = res;
       },
       (err)=> 
       {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

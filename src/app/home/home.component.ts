@@ -18,17 +18,19 @@ export class HomeComponent implements OnInit {
     {
       this.account_service.co = this.storage.getCOValue()
     }
-    if(this.storage.getPOValue())
+    if(this.storage.getPOValue() && this.storage.getPOValue().length!=0)
     {
       this.account_service.po = this.storage.getPOValue()
     }
     if(this.storage.getCourseDetailsValue())
     {
       this.account_service.main_course_details = this.storage.getCourseDetailsValue()
+      //console.log("Changed");
+      
     }
-    console.log(this.account_service.co)
-    console.log(this.account_service.po)
-    console.log(this.account_service.main_course_details)
+    //console.log(this.account_service.co)
+    //console.log(this.account_service.po)
+    //console.log(this.account_service.main_course_details)
 
   }
 

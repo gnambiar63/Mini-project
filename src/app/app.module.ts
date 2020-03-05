@@ -25,6 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AssessmentComponent } from './home/input/assessment/assessment.component';
 import { CoPiMappingComponent } from './home/input/co-pi-mapping/co-pi-mapping.component';
 import { DraftsComponent } from './start/drafts/drafts.component';
+import { PrerequisitesComponent } from './home/input/prerequisites/prerequisites.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { DraftsComponent } from './start/drafts/drafts.component';
     AssessmentComponent,
     CoPiMappingComponent,
     DraftsComponent,
+    PrerequisitesComponent,
     
   ],
   imports: [

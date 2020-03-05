@@ -15,7 +15,7 @@
                     <input id="code" formControlName="code" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="session">Sessions Of Course</label>
+                    <label for="session">Lab Course?(0 for No and 1 for Yes)</label>
                     <input id="sessions" formControlName="session" type="text" class="form-control">
                 </div>
                 <div class="form-group">
@@ -31,6 +31,26 @@
                     <input id="ltp" formControlName="ltp" type="text" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="ise">ISE</label>
+                    <input id="ise" formControlName="ise" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="mse">MSE</label>
+                    <input id="mse" formControlName="mse" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ese">ESE</label>
+                    <input id="ese" formControlName="ese" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="total">TOTAL</label>
+                    <input id="total" formControlName="total" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="faculty">Faculty</label>
+                    <input id="faculty" formControlName="faculty" type="text" class="form-control">
+                </div>
+                <div class="form-group">
                         <label for="co">No of CO's</label>
                         <input id="co" formControlName="co" type="text" class="form-control">
                     </div>
@@ -38,6 +58,9 @@
                     <button class="btn btn-sm btn-primary" matStepperNext type="submit">Save and Proceed</button>
                 </div>
             </form>
+        </mat-step>
+        <mat-step label="Prerequisites">
+            <app-prerequisites></app-prerequisites>       
         </mat-step>
         <mat-step label="Course Outcomes">
             <app-course-outcome></app-course-outcome>       

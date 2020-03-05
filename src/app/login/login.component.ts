@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   onsubmit():void{
-    console.log(this.loginform.value);
+    //console.log(this.loginform.value);
     this.account_service.login(this.loginform.value).subscribe(
       (res)=> {
-        console.log(res);
+        //console.log(res);
         this.value = '1';
         this.account_service.changeEmail(res.Email)
         this.router.navigateByUrl('/start');
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       },
       (err)=> 
       {
-        console.log(err);
+        //console.log(err);
         if(err.status == '401')
         {
           this.value = '0';
@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
 
     // if(true)
     // {
-    //   console.log(this.loginsuccess);
-    //   console.log('Moving to home');
+    //   //console.log(this.loginsuccess);
+    //   //console.log('Moving to home');
     //   this.account_service.setValue(this.Email);
     //   this.router.navigate(['/home']);
     // }

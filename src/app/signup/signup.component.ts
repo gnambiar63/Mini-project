@@ -37,12 +37,14 @@ export class SignupComponent implements OnInit {
 
 
   onsubmit():void{
-    console.log(this.signupform.value);
+    //console.log(this.signupform.value);
     this.account_service.register(this.signupform.value).subscribe(
-      (res)=> {console.log(res),        
-      this.router.navigateByUrl('/home');
+      (res)=> {
+      //console.log(res)
+      this.account_service.changeEmail(res.Email)        
+      this.router.navigateByUrl('/start');
     },
-      (err)=> console.log(err)
+      (err)=> {}////console.log(err)
     );
   }
 

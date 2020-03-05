@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { StartComponent } from './start/start.component';
 import { DraftsComponent } from './../app/start/drafts/drafts.component';
+import { PrerequisitesComponent } from './home/input/prerequisites/prerequisites.component';
 
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path : 'home', component : HomeComponent },
   { path : 'start', component : StartComponent },
   { path : 'drafts', component : DraftsComponent },
+  { path : 'prerequisites', component : PrerequisitesComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 

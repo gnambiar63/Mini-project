@@ -45,16 +45,16 @@ export class COPOMappingComponent implements OnInit {
   PO_submit(num)
   {
     // this.co[this.PO_index].PO_map.push(this.PO_details.controls['po_pso'].value);
-    console.log(num);
+    // console.log(num);
 
     var x = (this.PO_details.controls['po_pso'].value).toUpperCase();
     var y = x.substr(0,2);
-    console.log(y);
+    // console.log(y);
 
     if(y.localeCompare("PO")==0)  //PO is added onto the specific CO
     {
       x = Number(x.substring(2));
-      console.log(x)
+      // console.log(x)
       
       if(x>=1 && x<=12)
       {
@@ -68,7 +68,7 @@ export class COPOMappingComponent implements OnInit {
     else if(y.localeCompare("PS")==0)    //PSO is added onto the specific CO
     {
       x = Number(x.substring(3));
-      console.log(x)
+      // console.log(x)
       
       if(x>=1 && x<=3)
       {
@@ -83,10 +83,10 @@ export class COPOMappingComponent implements OnInit {
         alert('PO/PSO entered is invalid');
       }
     
-      console.log(this.account_service.po);
+      // console.log(this.account_service.po);
     
     //this.co[num].PO_map.push(this.PO_details.controls['po_pso'].value);
-    console.log(this.co[num].PO_map);
+    // console.log(this.co[num].PO_map);
     this.show = true;
     this.account_service.changeMessage(this.co)
 
@@ -95,11 +95,11 @@ export class COPOMappingComponent implements OnInit {
   }
   
   del(event,index,num){
-    console.log(index+1);
+    // console.log(index+1);
     var x = this.co[num].PO_map[index].toString();
     this.co[num].PO_map.splice(index,1);
 
-    console.log(x);
+    // console.log(x);
 
     if((x.substr(0,2)).localeCompare("PO") == 0)
     {
@@ -110,7 +110,7 @@ export class COPOMappingComponent implements OnInit {
       index = Number(x.substring(3));
     }
     index-=1;
-    console.log(index);
+    // console.log(index);
 
 
     const loc = this.po[index].CO_list.indexOf(num);
@@ -130,10 +130,10 @@ export class COPOMappingComponent implements OnInit {
     this.storage.setPOValue(this.account_service.po)
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
   }

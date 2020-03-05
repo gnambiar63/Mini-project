@@ -55,7 +55,7 @@ export class AssessmentComponent implements OnInit {
   }
   
   del(event,index,num){
-    console.log(index+1);
+    // console.log(index+1);
     // var x = this.co[num].PO_map[index].toString();
     this.co[num].CO_Assessment.splice(index,1);
 
@@ -71,10 +71,10 @@ export class AssessmentComponent implements OnInit {
   {
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
   }

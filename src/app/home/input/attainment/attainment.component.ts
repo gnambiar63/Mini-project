@@ -74,7 +74,7 @@ export class AttainmentComponent implements OnInit {
       //   this.final_button.nativeElement.disabled = false;
       //   (document.getElementById("at-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
       // }
-      console.log(this.ctr)
+      // console.log(this.ctr)
       this.ctr = this.ctr + 1
       // this.storage.setPOValue(this.account_service.po)
   }
@@ -84,17 +84,17 @@ export class AttainmentComponent implements OnInit {
     this.account_service.Direct_PO();
     // this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
-    console.log(this.account_service.po)
+    // console.log(this.account_service.po)
   }
 
   Save(event:Event)
   {
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
   }

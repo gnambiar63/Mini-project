@@ -19,7 +19,7 @@ export class StartComponent implements OnInit {
 
   co:Array<CO>=[];
   po:Array<PO>=[];
-  main_course_details=["","","","","","",""];
+  main_course_details=["","","","","","","",[],"","","","",""]; //course-name,course-code,lab,semester,credits,ltp,prerequisites,ise,mse,ese,total,Faculty in charge
 
   constructor(private router:Router) { }
   
@@ -45,6 +45,7 @@ export class StartComponent implements OnInit {
   }
   Redirect(event : Event)
   {
+    
     sessionStorage.setItem('CO', JSON.stringify(this.co));
     sessionStorage.setItem('PO', JSON.stringify(this.po));
     sessionStorage.setItem('CD', JSON.stringify(this.main_course_details));

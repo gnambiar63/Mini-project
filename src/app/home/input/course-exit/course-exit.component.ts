@@ -35,7 +35,7 @@ export class CourseExitComponent implements OnInit {
     this.co=this.account_service.co;
     // this.account_service.currentMessage.subscribe(message => this.co = message)
 
-    console.log(this.co);
+    // console.log(this.co);
   }
   ngAfterViewInit()
   {
@@ -75,7 +75,7 @@ export class CourseExitComponent implements OnInit {
     // )
 
     // this.account_service.co=this.co;
-    console.log(this.account_service.co)
+    // console.log(this.account_service.co)
 
     
     if(this.account_service.co.length!=0 && num< this.stepper._steps.length-1 && this.course_exit.touched == false  && this.course_exit.dirty == false)
@@ -101,10 +101,10 @@ export class CourseExitComponent implements OnInit {
     this.storage.setPOValue(this.account_service.po)
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
   }

@@ -61,7 +61,7 @@ export class MarksDistributionComponent implements OnInit {
 
   marks(num)
   {
-   console.log(this.marks_dist.value); 
+  //  console.log(this.marks_dist.value); 
    this.account_service.co[num].ISE1=this.marks_dist.controls['ISE1'].value;
    this.account_service.co[num].ISE2=this.marks_dist.controls['ISE2'].value;
    this.account_service.co[num].MSE=this.marks_dist.controls['MSE'].value;
@@ -80,8 +80,9 @@ export class MarksDistributionComponent implements OnInit {
    }
    if(num >= this.stepper._steps.length-1)
    {
-     this.final_button.nativeElement.disabled = false;
-     (document.getElementById("at-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
+      // console.log(num)
+      this.final_button.nativeElement.disabled = false;
+     (document.getElementById("mardist-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
    }
   //  this.storage.setPOValue(this.account_service.po)
   }
@@ -93,10 +94,10 @@ export class MarksDistributionComponent implements OnInit {
     this.storage.setPOValue(this.account_service.po)
     this.account_service.save_draft().subscribe(
       (res)=>{
-        console.log("File saved")
+        // console.log("File saved")
       },
       (err)=>{
-        console.log("Failed!!")
+        // console.log("Failed!!")
       }
     );
     console.log(this.account_service.co)

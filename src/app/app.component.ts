@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from './shared/account.service';
 
@@ -8,7 +8,11 @@ import { AccountService } from './shared/account.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  @ViewChild('dropdown',{static: false}) dropdown: ElementRef<HTMLElement>;
+
   title = 'obe';
+  showOption = "false";
   public mobile : any;
   public innerWidth: any;
   public email;
@@ -20,8 +24,8 @@ export class AppComponent {
         {
           sessionStorage.setItem('Email', data);
         }
-        console.log(sessionStorage.getItem('Email'))
-        // console.log(this.co);
+        ////console.log(sessionStorage.getItem('Email'))
+        // ////console.log(this.co);
       });
   }
   ngOnInit(){
@@ -30,7 +34,7 @@ export class AppComponent {
       this.email = sessionStorage.getItem('Email');
       this.account_service.email = this.email
     }
-    console.log("This is "+this.email)
+    ////console.log("This is "+this.email)
     this.onResize(null);
   }
   @HostListener('window:resize', ['$event'])
@@ -44,16 +48,25 @@ export class AppComponent {
       this.mobile=false;
       if(this.router.url === '/login')
       {
-        console.log('true');
+        ////console.log('true');
       }
-      console.log(this.innerWidth);
+      ////console.log(this.innerWidth);
     }
   }
 
   updateEmail($event)
   {
-    console.log("update email")
-    console.log($event)
+    ////console.log("update email")
+    ////console.log($event)
     this.email = $event;
+  }
+  logout(event:Event)
+  {
+    // this.dropdown.nativeElement.toggleAttribute
+    ////console.log(this.dropdown.nativeElement.toggleAttribute)
+    ////console.log("Logging Out")
+    sessionStorage.setItem('Email', '');
+    // this.showOption = "false";
+    this.router.navigateByUrl('/login');
   }
 }

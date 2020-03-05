@@ -6,11 +6,12 @@ import { PO } from '../../../shared/PO.model';
 import { StorageService } from '../../../shared/storage.service';
 import { MatStepper } from '@angular/material';
 @Component({
-  selector: 'app-co-pi-mapping',
-  templateUrl: './co-pi-mapping.component.html',
-  styleUrls: ['./co-pi-mapping.component.css']
+  selector: 'app-prerequisites',
+  templateUrl: './prerequisites.component.html',
+  styleUrls: ['./prerequisites.component.css']
 })
-export class CoPiMappingComponent implements OnInit {
+export class PrerequisitesComponent implements OnInit {
+
   @ViewChild('stepper',{static: false}) stepper:MatStepper;
   @ViewChild('btn',{static: false}) final_button;
 
@@ -19,7 +20,7 @@ export class CoPiMappingComponent implements OnInit {
   po:Array<PO>;
   show:boolean=false;
   constructor(private fb:FormBuilder,private account_service:AccountService,private storage:StorageService) { }
-
+  preq;
 
   ngOnInit() {
     this.PO_details=this.fb.group({
@@ -27,34 +28,32 @@ export class CoPiMappingComponent implements OnInit {
     })
     this.co=this.account_service.co;
     this.po=this.account_service.po;
+    this.preq = this.account_service.main_course_details[7]
+    //console.log(this.preq);
+    
   }
 
-  access(event : Event,i)
-  {
-    let x = document.getElementById("copi-"+String(this.stepper._steps.length-1));
-    x.innerHTML="Save Changes";
-    if(i >= this.stepper._steps.length-1)
-    {
-      this.final_button.nativeElement.disabled = false;
-      (document.getElementById("copi-"+String(this.stepper._steps.length-1)) as HTMLButtonElement).disabled=true;
-    }
-  }
 
-  PO_submit(num)
+  PO_submit()
   {
     // this.co[this.PO_index].PO_map.push(this.PO_details.controls['po_pso'].value);
-    this.co[num].PI_map.push(this.PO_details.controls['po_pso'].value);
+    this.preq.push(this.PO_details.controls['po_pso'].value);
+    this.account_service.main_course_details[7] = this.preq;
     this.show = true;
     this.account_service.changeMessage(this.co)
 
     this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
+    this.storage.setCourseDetailsValue(this.account_service.main_course_details)
+
+
   }
   
-  del(event,index,num){
-    // console.log(index+1);
+  del(event,index){
+    //console.log(index+1);
     // var x = this.co[num].PO_map[index].toString();
-    this.co[num].PI_map.splice(index,1);
+    this.preq.splice(index,1);
+    this.account_service.main_course_details[7] = this.preq;
 
     // console.log(this.po[index].CO_list)
     // console.log(index)
@@ -62,16 +61,20 @@ export class CoPiMappingComponent implements OnInit {
 
     this.storage.setCOValue(this.account_service.co)
     this.storage.setPOValue(this.account_service.po)
+    this.storage.setCourseDetailsValue(this.account_service.main_course_details)
   }
+
   Save(event:Event)
   {
     this.account_service.save_draft().subscribe(
       (res)=>{
-        // console.log("File saved")
+        //console.log("File saved")
       },
       (err)=>{
-        // console.log("Failed!!")
+        //console.log("Failed!!")
       }
     );
   }
+
+
 }

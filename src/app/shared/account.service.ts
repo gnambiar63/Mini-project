@@ -14,10 +14,12 @@ export class AccountService {
   private data : string = '';
   public email : string = '';
 
+  public url = "https://outcome-based-evaluation.herokuapp.com";
+  //"http://"+ window.location.hostname +":3000/register
 
   co:Array<CO>=[];
   po:Array<PO>=[];
-  main_course_details=["","","","","","",""];
+  main_course_details=["","","","","","","",[],"","","","",""]; //course-name,course-code,lab,semester,credits,ltp,prerequisites,ise,mse,ese,total,Faculty in charge
   course_details : FormGroup;
   public demo:Observable<any>;
   public course_exit:Observable<any>;
@@ -27,6 +29,7 @@ export class AccountService {
 
   public final_attainment = [0,0];
 
+  public prereq = [];
 
 
 
@@ -37,12 +40,12 @@ export class AccountService {
 
   register(signupdata)
   {
-    return this.http.post<any>("http://"+ window.location.hostname +":3000/register",signupdata);
+    return this.http.post<any>(this.url + "/register",signupdata);
   }
   login(logindata)
   {
-    console.log(window.location.hostname)
-    return this.http.post<any>("http://"+ window.location.hostname +":3000/login",logindata);
+    //console.log(window.location.hostname)
+    return this.http.post<any>(this.url +"/login",logindata);
   }
   save_draft()
   {
@@ -53,14 +56,15 @@ export class AccountService {
       "CO":this.co,
       "PO":this.po
     }
-    return this.http.post<any>("http://"+ window.location.hostname +":3000/save_drafts",file);
+    return this.http.post<any>(this.url +"/saveDraft",file);
   }
   find_draft()
   {
     var email={
       "Email" : sessionStorage.getItem('Email')
     }
-    return this.http.post<any>("http://"+ window.location.hostname +":3000/find_drafts",email);
+    //console.log(email.Email)
+    return this.http.post<any>(this.url + "/findDraft",email);
   }
   // setValue(val) {
   //   this.co = val;
@@ -73,12 +77,12 @@ export class AccountService {
 
 
   change() {
-    console.log('change started'); 
+    //console.log('change started'); 
      this.fire.emit(this.co);
    }
 
    updateMail() {
-    console.log('change started'); 
+    //console.log('change started'); 
      this.fire.emit(this.email);
    }
 
@@ -90,7 +94,7 @@ export class AccountService {
       {
         this.po[i].CO_list.forEach((item)=>
         {  
-           //console.log(this.sum) 
+           ////console.log(this.sum) 
            this.po[i].Direct_PO += Number(this.co[item].dv) 
         });
         this.po[i].Direct_PO /= this.po[i].CO_list.length;
@@ -106,11 +110,11 @@ export class AccountService {
       {
         this.po[i].CO_list.forEach((item)=>
         {  
-           //console.log(this.sum) 
+           ////console.log(this.sum) 
            this.po[i].Indirect_PO += Number(((this.co[item].course_exit[2])*3 + (this.co[item].course_exit[1])*2 + (this.co[item].course_exit[0])*1)/((this.co[item].course_exit[2]*1 + this.co[item].course_exit[1]*1 + this.co[item].course_exit[0]*1)*3)*100) 
         });
         this.po[i].Indirect_PO /= this.po[i].CO_list.length;
-        // console.log(this.po[i].Indirect_PO);
+        // //console.log(this.po[i].Indirect_PO);
         this.po[i].L1=this.Attainment_Calculation(this.po[i].Direct_PO)
         this.po[i].L2=this.Attainment_Calculation(this.po[i].Indirect_PO)
       }
@@ -140,7 +144,7 @@ export class AccountService {
         this.sum = 0;
         this.po[i].CO_list.forEach((item)=>
         {  
-           //console.log(this.sum) 
+           ////console.log(this.sum) 
            this.sum += Number(this.co[item].No_of_hours) 
         });
         this.po[i].Total_Sessions = this.sum
@@ -220,64 +224,129 @@ export class AccountService {
    }
    New_Direct_CO()
    {
-     for(let i=0;i<this.co.length;i++)
+     if(this.main_course_details[2]!="1")
      {
-       let num = 2;
-       if(this.co[i].ISE1 == 0 || this.co[i].ISE2 == 0)
-       {
-         num--;
-       }
-       this.co[i].ISEAvg = (this.co[i].ISE1 + this.co[i].ISE2)/num;
-       if(this.co[i].ISEAvg > 70)
-       {
-        this.co[i].ISEA = 3;
-       }
-       else if(this.co[i].ISEAvg > 50)
-       {
-        this.co[i].ISEA = 2;
-       }
-       else if(this.co[i].ISEAvg == 0)
-       {
-        this.co[i].ISEA = 0;
-       }
-       else
-       {
-        this.co[i].ISEA = 1;
-       } 
-
-       if(this.co[i].MSE > 60)
-       {
-        this.co[i].MSEA = 3;
-       }
-       else if(this.co[i].MSE > 40)
-       {
-        this.co[i].MSEA = 2;
-       }
-       else if(this.co[i].MSE == 0)
-       {
-        this.co[i].MSEA = 0;
-       }
-       else
-       {
-        this.co[i].MSEA = 1;
-       }
-       
-       if(this.co[i].ESE > 60)
-       {
-        this.co[i].ESEA = 3;
-       }
-       else if(this.co[i].ESE > 40)
-       {
-        this.co[i].ESEA = 2;
-       }
-       else if(this.co[i].ESE == 0)
-       {
-        this.co[i].ESEA = 0;
-       }
-       else
-       {
-        this.co[i].ESEA = 1;
-       } 
+      for(let i=0;i<this.co.length;i++)
+      {
+        let num = 2;
+        if(this.co[i].ISE1 == 0 || this.co[i].ISE2 == 0)
+        {
+          num--;
+        }
+        this.co[i].ISEAvg = (this.co[i].ISE1 + this.co[i].ISE2)/num;
+        if(this.co[i].ISEAvg > 70)
+        {
+         this.co[i].ISEA = 3;
+        }
+        else if(this.co[i].ISEAvg > 50)
+        {
+         this.co[i].ISEA = 2;
+        }
+        else if(this.co[i].ISEAvg == 0)
+        {
+         this.co[i].ISEA = 0;
+        }
+        else
+        {
+         this.co[i].ISEA = 1;
+        } 
+ 
+        if(this.co[i].MSE > 60)
+        {
+         this.co[i].MSEA = 3;
+        }
+        else if(this.co[i].MSE > 40)
+        {
+         this.co[i].MSEA = 2;
+        }
+        else if(this.co[i].MSE == 0)
+        {
+         this.co[i].MSEA = 0;
+        }
+        else
+        {
+         this.co[i].MSEA = 1;
+        }
+        
+        if(this.co[i].ESE > 60)
+        {
+         this.co[i].ESEA = 3;
+        }
+        else if(this.co[i].ESE > 40)
+        {
+         this.co[i].ESEA = 2;
+        }
+        else if(this.co[i].ESE == 0)
+        {
+         this.co[i].ESEA = 0;
+        }
+        else
+        {
+         this.co[i].ESEA = 1;
+        } 
+      }
+     }
+     else
+     {
+      for(let i=0;i<this.co.length;i++)
+      {
+        let num = 2;
+        if(this.co[i].ISE1 == 0 || this.co[i].ISE2 == 0)
+        {
+          num--;
+        }
+        this.co[i].ISEAvg = (this.co[i].ISE1 + this.co[i].ISE2)/num;
+        if(this.co[i].ISEAvg > 80)
+        {
+         this.co[i].ISEA = 3;
+        }
+        else if(this.co[i].ISEAvg > 60)
+        {
+         this.co[i].ISEA = 2;
+        }
+        else if(this.co[i].ISEAvg == 0)
+        {
+         this.co[i].ISEA = 0;
+        }
+        else
+        {
+         this.co[i].ISEA = 1;
+        } 
+ 
+        if(this.co[i].MSE > 60)
+        {
+         this.co[i].MSEA = 3;
+        }
+        else if(this.co[i].MSE > 40)
+        {
+         this.co[i].MSEA = 2;
+        }
+        else if(this.co[i].MSE == 0)
+        {
+         this.co[i].MSEA = 0;
+        }
+        else
+        {
+         this.co[i].MSEA = 1;
+        }
+        
+        if(this.co[i].ESE > 80)
+        {
+         this.co[i].ESEA = 3;
+        }
+        else if(this.co[i].ESE > 60)
+        {
+         this.co[i].ESEA = 2;
+        }
+        else if(this.co[i].ESE == 0)
+        {
+         this.co[i].ESEA = 0;
+        }
+        else
+        {
+         this.co[i].ESEA = 1;
+        } 
+      }
      }
      this.Direct_CO_Value()
    }
@@ -286,13 +355,13 @@ export class AccountService {
       for(let i=0;i<this.co.length;i++)
       {
         this.co[i].dv = (0.2*(this.co[i].ISEA) + 0.2*(this.co[i].MSEA) + 0.6*(this.co[i].ESEA));
-        console.log(this.co[i].dv)
+        //console.log(this.co[i].dv)
 
 
         if((this.co[i].MSEA == 0 && this.co[i].ESEA == 0) || (this.co[i].ESEA == 0 && this.co[i].ISEA == 0))
         {
           this.co[i].dv *= 5;
-          console.log(this.co[i].dv)
+          //console.log(this.co[i].dv)
         }
         else if(this.co[i].MSEA == 0 || this.co[i].ISEA == 0)
         {
@@ -307,7 +376,7 @@ export class AccountService {
           this.co[i].dv = this.co[i].ESEA;
         }
 
-        console.log(this.co[i].dv)
+        //console.log(this.co[i].dv)
       }
    }
 
@@ -328,7 +397,7 @@ export class AccountService {
       {
        this.co[i].CSA = 1;
       }
-      console.log(this.co[i].CSA) 
+      //console.log(this.co[i].CSA) 
      }
      this.Total_Attainment()
    }
